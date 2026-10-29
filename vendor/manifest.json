@@ -1,0 +1,501 @@
+{
+  "reviewed": "2026-10-29",
+  "files": [
+    {
+      "path": "motor/docs/patcher.js",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "docs/patcher.js",
+      "sha256": "74e831605ce654dd5c3f8b8e6b6f00e5defaf3f0592d8305bbe0ad3f5b947b3b",
+      "bytes": 17032
+    },
+    {
+      "path": "motor/docs/motorcycles.mcpatch",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "docs/motorcycles.mcpatch",
+      "sha256": "4b97d8b95adb810efdb0a266f157e3fcbfee96e5a2971d23f83aee67a5e29af2",
+      "bytes": 157333
+    },
+    {
+      "path": "motor/LICENSE",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "LICENSE",
+      "sha256": "a8a1009c0c8c102bf638bc54523953424b5703e38c54bc5b07f29d96ba3887d9",
+      "bytes": 1287
+    },
+    {
+      "path": "motor/README.md",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "README.md",
+      "sha256": "51fb0f7d2f1b4e11efc07285ac84df72bcab72373ab0698d777bd501744787a7",
+      "bytes": 14798
+    },
+    {
+      "path": "motor/third-party-notices/LICENSE-Braids",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "third-party-notices/LICENSE-Braids",
+      "sha256": "51ea25298ae08aa5c814fbc151715f9f426bbd1c2934c1c091e558e8e70ecf28",
+      "bytes": 1322
+    },
+    {
+      "path": "motor/third-party-notices/LICENSE-Modded-Cycles",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "third-party-notices/LICENSE-Modded-Cycles",
+      "sha256": "909b87820909a5c39b01e3c147c63bf38b3fbe2957d463b3545173b1df20c4e0",
+      "bytes": 1097
+    },
+    {
+      "path": "motor/third-party-notices/LICENSE-Model-TG",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "third-party-notices/LICENSE-Model-TG",
+      "sha256": "ccbebdf881a15936c407c18c85c6d43725b7943d33cf8e9f43e24a9a2425153d",
+      "bytes": 1364
+    },
+    {
+      "path": "motor/third-party-notices/LICENSE-elektron-model-tweaks",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "third-party-notices/LICENSE-elektron-model-tweaks",
+      "sha256": "2b2390f7ab2be71d7e3f0ee0e5279c0bc814037652c7fe08dfb77cc2c3e6d8f4",
+      "bytes": 1066
+    },
+    {
+      "path": "motor/third-party-notices/LICENSE-ms-multi-output",
+      "repo": "nzimas/motorcycles",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "source": "third-party-notices/LICENSE-ms-multi-output",
+      "sha256": "5f13db5fca651e4091b002c55052b80c41ad7181a414b6eace3a70b2e3da7ba4",
+      "bytes": 1070
+    },
+    {
+      "path": "tg/flasher/elektron.js",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "flasher/elektron.js",
+      "sha256": "5b4884912429dceab277de513ed6638e8d7c6b9950caf9183d8efb0a684578ac",
+      "bytes": 21794
+    },
+    {
+      "path": "tg/flasher/patch.js",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "flasher/patch.js",
+      "sha256": "dc76a927860c2f7d7431bc782ea22cb5084f820869bc16b1927df07de7c04e46",
+      "bytes": 3324
+    },
+    {
+      "path": "tg/flasher/model-tg.json",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "flasher/model-tg.json",
+      "sha256": "1e921d330db41ce5db0b8742abc080b92beb1b66c196d25b472ed63db32ba756",
+      "bytes": 126343
+    },
+    {
+      "path": "tg/tweaks/model-cycles_OS1.13/01-latching-mute.json",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "tweaks/model-cycles_OS1.13/01-latching-mute.json",
+      "sha256": "21de02b88903b2012c88f31ef3b593afa0b37f48c22884986961cee0fb5b0f47",
+      "bytes": 2795
+    },
+    {
+      "path": "tg/LICENSE",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "LICENSE",
+      "sha256": "ccbebdf881a15936c407c18c85c6d43725b7943d33cf8e9f43e24a9a2425153d",
+      "bytes": 1364
+    },
+    {
+      "path": "tg/README.md",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "README.md",
+      "sha256": "29c0b8f2f4549cc6c88452c5b5ed59e5b86bff209ca5c1fe23d9ab755f083735",
+      "bytes": 3331
+    },
+    {
+      "path": "tg/tweaks/LICENSE-elektron-model-tweaks",
+      "repo": "TinyGregAudio/Model-TG",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "source": "tweaks/LICENSE-elektron-model-tweaks",
+      "sha256": "2b2390f7ab2be71d7e3f0ee0e5279c0bc814037652c7fe08dfb77cc2c3e6d8f4",
+      "bytes": 1066
+    },
+    {
+      "path": "mc/docs/flasher/builder.js",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/builder.js",
+      "sha256": "d889d889d941f57d515bdd0ae89aeb60a0106b0bf488a46ecfe5bb129f73b1fc",
+      "bytes": 45158
+    },
+    {
+      "path": "mc/docs/flasher/tweaks.js",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/tweaks.js",
+      "sha256": "db12b449b5afd1967acc2f8e7fcaa7dd82582f355ca9c2ec665f8762d798ac97",
+      "bytes": 555717
+    },
+    {
+      "path": "mc/docs/flasher/flasher.js",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/flasher.js",
+      "sha256": "f332a764b30c28d5ef68213b0b6c1496dca6d098fee18701afce4bb372b1fe95",
+      "bytes": 13844
+    },
+    {
+      "path": "mc/docs/flasher/app.js",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/app.js",
+      "sha256": "1fada59c7d72b13952c740ba0b74dacbf592e781003a4513891e23dc5c0665af",
+      "bytes": 137921
+    },
+    {
+      "path": "mc/LICENSE",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "LICENSE",
+      "sha256": "909b87820909a5c39b01e3c147c63bf38b3fbe2957d463b3545173b1df20c4e0",
+      "bytes": 1097
+    },
+    {
+      "path": "mc/THIRD-PARTY-NOTICES.md",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "THIRD-PARTY-NOTICES.md",
+      "sha256": "c7ce53816699e890bd3ba0bf17b6993e95808b5d519afe7b36ec4c577c8a7db1",
+      "bytes": 8272
+    },
+    {
+      "path": "mc/README.md",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "README.md",
+      "sha256": "2ccd5a043c9fdc2b4dd1542a71cb2fb58170c74a703d8c2f5c4bdba543edae92",
+      "bytes": 13738
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-Braids.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-Braids.txt",
+      "sha256": "51ea25298ae08aa5c814fbc151715f9f426bbd1c2934c1c091e558e8e70ecf28",
+      "bytes": 1322
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-Model-TG.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-Model-TG.txt",
+      "sha256": "ccbebdf881a15936c407c18c85c6d43725b7943d33cf8e9f43e24a9a2425153d",
+      "bytes": 1364
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-Open303.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-Open303.txt",
+      "sha256": "44e56167c8c5d9305ddb5622d062a3f45ee0c672b8c5d51b1d88905f3b8f6197",
+      "bytes": 1351
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-elektron-firmware-tool.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-elektron-firmware-tool.txt",
+      "sha256": "35ae461c853f98495e1a6c7bc2b0625cb89cb2b846a80b0747ba9b0d76f28f8b",
+      "bytes": 1072
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-elektron-model-tweaks.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-elektron-model-tweaks.txt",
+      "sha256": "2b2390f7ab2be71d7e3f0ee0e5279c0bc814037652c7fe08dfb77cc2c3e6d8f4",
+      "bytes": 1066
+    },
+    {
+      "path": "mc/docs/flasher/LICENSE-ms-multi-output.txt",
+      "repo": "18nelli18/Modded-Cycles",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "source": "docs/flasher/LICENSE-ms-multi-output.txt",
+      "sha256": "5f13db5fca651e4091b002c55052b80c41ad7181a414b6eace3a70b2e3da7ba4",
+      "bytes": 1070
+    },
+    {
+      "path": "model27/docs/flasher/builder.js",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/builder.js",
+      "sha256": "c6bd8c055df3a4a8576bc1b71d46553a699424f691ebd1bf145232ac0135dfee",
+      "bytes": 45937
+    },
+    {
+      "path": "model27/docs/flasher/composer.js",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/composer.js",
+      "sha256": "7495077d9800aa08faaff0a7cb41b07afedce395eee80e1a970e4b46f59de704",
+      "bytes": 53838
+    },
+    {
+      "path": "model27/docs/flasher/tweaks.js",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/tweaks.js",
+      "sha256": "f311aa6c336dc72950c4a7b0713af188b3f53812922f3af81c7008cc64abe164",
+      "bytes": 179623
+    },
+    {
+      "path": "model27/LICENSE",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "LICENSE",
+      "sha256": "e5f50b09c2cd3c0a49893103412a668a471d5d7f20d5855e8ec65f9d862305ce",
+      "bytes": 1139
+    },
+    {
+      "path": "model27/README.md",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "README.md",
+      "sha256": "59215dd9ef38e1bd752cf05d2f4dcf3c85cabe3a052d9689f2c41d5780979566",
+      "bytes": 15012
+    },
+    {
+      "path": "model27/THIRD-PARTY-NOTICES.md",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "THIRD-PARTY-NOTICES.md",
+      "sha256": "b5a29da9c4e01c36e9ffbc1320a767e17a6969220c98ec2840f6f35516c02fd0",
+      "bytes": 9191
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-Braids.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-Braids.txt",
+      "sha256": "51ea25298ae08aa5c814fbc151715f9f426bbd1c2934c1c091e558e8e70ecf28",
+      "bytes": 1322
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-Control-All-Config.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-Control-All-Config.txt",
+      "sha256": "673bde56f7aa69a0fcf92ba8a9ccbee0498fd6621488a79949c38b49960c8e3d",
+      "bytes": 1080
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-Model-TG.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-Model-TG.txt",
+      "sha256": "ccbebdf881a15936c407c18c85c6d43725b7943d33cf8e9f43e24a9a2425153d",
+      "bytes": 1364
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-One-Shot.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-One-Shot.txt",
+      "sha256": "673bde56f7aa69a0fcf92ba8a9ccbee0498fd6621488a79949c38b49960c8e3d",
+      "bytes": 1080
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-Open303.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-Open303.txt",
+      "sha256": "44e56167c8c5d9305ddb5622d062a3f45ee0c672b8c5d51b1d88905f3b8f6197",
+      "bytes": 1351
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-PPPCCC.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-PPPCCC.txt",
+      "sha256": "8e05c1e753d8707d7f104bc1c5996ea41e8056f3d7b515ac13e68a6f5721aef7",
+      "bytes": 1227
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-elektron-firmware-tool.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-elektron-firmware-tool.txt",
+      "sha256": "35ae461c853f98495e1a6c7bc2b0625cb89cb2b846a80b0747ba9b0d76f28f8b",
+      "bytes": 1072
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-elektron-model-tweaks.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-elektron-model-tweaks.txt",
+      "sha256": "2b2390f7ab2be71d7e3f0ee0e5279c0bc814037652c7fe08dfb77cc2c3e6d8f4",
+      "bytes": 1066
+    },
+    {
+      "path": "model27/docs/flasher/LICENSE-ms-multi-output.txt",
+      "repo": "durchgemacht/model27",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "source": "docs/flasher/LICENSE-ms-multi-output.txt",
+      "sha256": "5f13db5fca651e4091b002c55052b80c41ad7181a414b6eace3a70b2e3da7ba4",
+      "bytes": 1070
+    },
+    {
+      "path": "pppccc/patches/manifest.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/manifest.json",
+      "sha256": "004c6b0949c14e7ca03a82c92c3888e7979203a04aea344549aae1cfaad096e5",
+      "bytes": 1303
+    },
+    {
+      "path": "pppccc/patches/00-core.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/00-core.json",
+      "sha256": "c5de2d8d287a4c70be5bd1574f579c8ed6bad06459ed934dc162bf0873b558ef",
+      "bytes": 7515
+    },
+    {
+      "path": "pppccc/patches/01-mute-solo.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/01-mute-solo.json",
+      "sha256": "45d70fb72e4f512097a2ef142a7888c5863d50eef381801e2195635ab604ede7",
+      "bytes": 1892
+    },
+    {
+      "path": "pppccc/patches/02-live-mute.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/02-live-mute.json",
+      "sha256": "67ba1550a8ddeac66a2ea0157afd4d79e8c6cbcac33d7e1bfd5b51ca10728cd6",
+      "bytes": 1232
+    },
+    {
+      "path": "pppccc/patches/03-hold-mute.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/03-hold-mute.json",
+      "sha256": "3815c4562c9a8bc20b9031ef0ae9c776eca6b55a3595392592e6196178f1d379",
+      "bytes": 3512
+    },
+    {
+      "path": "pppccc/patches/04-delay-notes.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/04-delay-notes.json",
+      "sha256": "fc6e8e898812d3152f170e0d79af5375aa2773933c3c4b7b28cee30f415b9e1e",
+      "bytes": 2707
+    },
+    {
+      "path": "pppccc/patches/05-reverb-fx.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/05-reverb-fx.json",
+      "sha256": "2359566dd7790eb6521be09f2d06a6668470da2edba397cbcbaeada801c192fb",
+      "bytes": 10548
+    },
+    {
+      "path": "pppccc/patches/06-delay-fx.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/06-delay-fx.json",
+      "sha256": "5aed6104fd1cc93801e56bb1ad60bc8bde7980947f48f45e43d19a84b9632fa1",
+      "bytes": 10105
+    },
+    {
+      "path": "pppccc/patches/07-strum.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/07-strum.json",
+      "sha256": "98a02d141fef0fb953b4c5049c6ec1b04024099536ba10332e13d465b6988df4",
+      "bytes": 3324
+    },
+    {
+      "path": "pppccc/patches/08-load-meter.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/08-load-meter.json",
+      "sha256": "6d2b7119ae8bd9d7861bb69f275de5a789b6b2996bc6efbed0f3c4b63d2ecd4e",
+      "bytes": 4103
+    },
+    {
+      "path": "pppccc/patches/09-groove.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/09-groove.json",
+      "sha256": "6d1dc3a0d8bfa4d9766879b397d0516f6a1204d055ace3874340af84ef45035a",
+      "bytes": 9503
+    },
+    {
+      "path": "pppccc/patches/10-control-mode.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/10-control-mode.json",
+      "sha256": "dafdf8ae4036bd6bf391a99e9ce74d00312bddcc64c1196bc8fbd62099578f0c",
+      "bytes": 4725
+    },
+    {
+      "path": "pppccc/patches/11-trig-select.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/11-trig-select.json",
+      "sha256": "8e67dacf129f82b8e20949d2a66e8b3ebdb40b39a19f376245be347eb0051282",
+      "bytes": 7271
+    },
+    {
+      "path": "pppccc/patches/12-fill2.json",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "patches/12-fill2.json",
+      "sha256": "cebf862828a348299c5c8fe5fb7e8dc7a38fbab292cabc5a9c26355de218ab54",
+      "bytes": 5090
+    },
+    {
+      "path": "pppccc/tools/apply_patches.py",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "tools/apply_patches.py",
+      "sha256": "15d76f4c25315b4dd49589d8a3cc230627862f253bae7d0b68091b1385c8b7ab",
+      "bytes": 7806
+    },
+    {
+      "path": "pppccc/LICENSE",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "LICENSE",
+      "sha256": "8e05c1e753d8707d7f104bc1c5996ea41e8056f3d7b515ac13e68a6f5721aef7",
+      "bytes": 1227
+    },
+    {
+      "path": "pppccc/THIRD-PARTY-NOTICES.md",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "THIRD-PARTY-NOTICES.md",
+      "sha256": "42fa123df9529552991f1979e5172bbddf0c9d9e42680ae686c0f4fa2e48f30f",
+      "bytes": 1995
+    },
+    {
+      "path": "pppccc/README.md",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "source": "README.md",
+      "sha256": "af46140b88b55759d62d9b117e374915f7f0793dbce9aaa25a4d8e2417249741",
+      "bytes": 17955
+    }
+  ]
+}

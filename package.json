@@ -1,0 +1,8 @@
+{
+ "name":"spokes",
+ "version":"0.1.0",
+ "private":true,
+ "description":"A community firmware picker and local browser flasher for Elektron Model:Cycles",
+ "scripts":{"test":"node test.mjs && node test-ui.cjs","start":"node serve.mjs"},
+ "devDependencies":{"jsdom":"30.1.3"}
+}
