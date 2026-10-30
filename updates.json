@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-10-30T00:23:52.198Z",
+  "checkedAt": "2026-10-30T18:02:06.311Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -42,10 +42,10 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "5badf6ad27d956e86d32ff331c480a84ef74db92",
-      "upstreamUpdatedAt": "2026-10-29T21:58:11Z",
+      "latest": "c7b1f4632de0004882c0055325c8515599b2e053",
+      "upstreamUpdatedAt": "2026-10-30T16:50:44Z",
       "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...5badf6ad27d956e86d32ff331c480a84ef74db92",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...c7b1f4632de0004882c0055325c8515599b2e053",
       "state": "update-available"
     },
     {
@@ -54,10 +54,11 @@
       "kind": "built-in",
       "pinned": "c6d0176485baebc375ca5f97b30699b44aabe53e",
       "incorporatedAt": "2026-10-29",
-      "latest": "c6d0176485baebc375ca5f97b30699b44aabe53e",
-      "upstreamUpdatedAt": "2026-10-27T19:10:21Z",
+      "latest": "43b894bd14f55313cef6381af9a008acec3ed0f1",
+      "upstreamUpdatedAt": "2026-10-30T09:55:14Z",
       "sourceUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods",
-      "state": "current"
+      "compareUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods/compare/c6d0176485baebc375ca5f97b30699b44aabe53e...43b894bd14f55313cef6381af9a008acec3ed0f1",
+      "state": "update-available"
     },
     {
       "id": "supermodel",
@@ -65,8 +66,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "188f74102459462de4ff7ef3e5ea20a3b5457931",
-      "upstreamUpdatedAt": "2026-10-29T23:40:41Z",
+      "latest": "08a3818ecf1741bd2fa95a1b412003e970c53fc5",
+      "upstreamUpdatedAt": "2026-10-30T17:35:07Z",
       "sourceUrl": "https://github.com/AveyCole/Supermodel",
       "state": "author-hosted"
     },
