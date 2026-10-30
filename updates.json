@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "checkedAt": "2026-10-30T00:20:52.784Z",
+  "policy": "daily-review-pr",
+  "sources": [
+    {
+      "id": "motor",
+      "repo": "nzimas/motorcycles",
+      "kind": "built-in",
+      "pinned": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "incorporatedAt": "2026-10-29",
+      "latest": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "upstreamUpdatedAt": "2026-10-27T09:58:38Z",
+      "sourceUrl": "https://github.com/nzimas/motorcycles",
+      "state": "current"
+    },
+    {
+      "id": "tg",
+      "repo": "TinyGregAudio/Model-TG",
+      "kind": "built-in",
+      "pinned": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "incorporatedAt": "2026-10-29",
+      "latest": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "upstreamUpdatedAt": "2026-10-02T11:25:04Z",
+      "sourceUrl": "https://github.com/TinyGregAudio/Model-TG",
+      "state": "current"
+    },
+    {
+      "id": "mc",
+      "repo": "18nelli18/Modded-Cycles",
+      "kind": "built-in",
+      "pinned": "259441967e39b283e458e5027eda27c86a663562",
+      "incorporatedAt": "2026-10-29",
+      "latest": "259441967e39b283e458e5027eda27c86a663562",
+      "upstreamUpdatedAt": "2026-10-19T21:54:48Z",
+      "sourceUrl": "https://github.com/18nelli18/Modded-Cycles",
+      "state": "current"
+    },
+    {
+      "id": "model27",
+      "repo": "durchgemacht/model27",
+      "kind": "built-in",
+      "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "incorporatedAt": "2026-10-29",
+      "latest": "5badf6ad27d956e86d32ff331c480a84ef74db92",
+      "upstreamUpdatedAt": "2026-10-29T21:58:11Z",
+      "sourceUrl": "https://github.com/durchgemacht/model27",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...5badf6ad27d956e86d32ff331c480a84ef74db92",
+      "state": "update-available"
+    },
+    {
+      "id": "pppccc",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "kind": "built-in",
+      "pinned": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "incorporatedAt": "2026-10-29",
+      "latest": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "upstreamUpdatedAt": "2026-10-27T19:10:21Z",
+      "sourceUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods",
+      "state": "current"
+    },
+    {
+      "id": "supermodel",
+      "repo": "AveyCole/Supermodel",
+      "kind": "author-hosted",
+      "pinned": null,
+      "incorporatedAt": null,
+      "latest": "188f74102459462de4ff7ef3e5ea20a3b5457931",
+      "upstreamUpdatedAt": "2026-10-29T23:40:41Z",
+      "sourceUrl": "https://github.com/AveyCole/Supermodel",
+      "state": "author-hosted"
+    },
+    {
+      "id": "machinedrum",
+      "repo": "Talachan12/Elektron-Model-Machinedrum",
+      "kind": "author-hosted",
+      "pinned": null,
+      "incorporatedAt": null,
+      "latest": "70e1483535c5a6919ff170ce3b79ba4a10c066ac",
+      "upstreamUpdatedAt": "2026-10-12T06:25:31Z",
+      "sourceUrl": "https://github.com/Talachan12/Elektron-Model-Machinedrum",
+      "state": "author-hosted"
+    },
+    {
+      "id": "tweaks",
+      "repo": "drumkilla/elektron-model-tweaks",
+      "kind": "author-hosted",
+      "pinned": null,
+      "incorporatedAt": null,
+      "latest": "98071694268dbc64f81debe6ba53551bb729519c",
+      "upstreamUpdatedAt": "2026-10-15T16:49:07Z",
+      "sourceUrl": "https://github.com/drumkilla/elektron-model-tweaks",
+      "state": "author-hosted"
+    },
+    {
+      "id": "elekloader",
+      "repo": "elekloader/elekloader",
+      "kind": "author-hosted",
+      "pinned": null,
+      "incorporatedAt": null,
+      "latest": "dc6ac1fd6792eeb3ab217b6ab2d6b73aa7aa30f6",
+      "upstreamUpdatedAt": "2026-10-29T03:39:32Z",
+      "sourceUrl": "https://github.com/elekloader/elekloader",
+      "state": "author-hosted"
+    },
+    {
+      "id": "plaits",
+      "repo": "DMDaudio/plaits-on-models",
+      "kind": "external-build",
+      "pinned": null,
+      "incorporatedAt": null,
+      "latest": "03899cc1d02656e0048e7d07df14e4001621fc39",
+      "upstreamUpdatedAt": "2026-10-08T19:30:51Z",
+      "sourceUrl": "https://github.com/DMDaudio/plaits-on-models",
+      "state": "external-build"
+    }
+  ]
+}

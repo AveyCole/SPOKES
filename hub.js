@@ -37,6 +37,7 @@ function renderCards(){
  }$('empty').hidden=!!count;
 }
 function detail(){
+ if(window.SpokesUpdates)window.SpokesUpdates.select(selected.id,lang);
  $('selected-name').textContent=selected.name;$('selected-author').textContent=selected.author+' · '+selected.version;
  $('description').textContent=selected[lang];$('integration').textContent=t(selected.mode+'Mode')+'. '+t('sampleNote');
  $('links').replaceChildren();for(const [url,key] of [[selected.source,'source'],[selected.upstream||selected.url,'upstream']])if(url){const a=document.createElement('a');a.href=url;a.textContent=t(key);a.target='_blank';a.rel='noopener';$('links').append(a);}

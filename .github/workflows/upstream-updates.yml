@@ -1,0 +1,112 @@
+name: Check upstream firmware updates
+on:
+  schedule:
+    - cron: '17 12 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Rebuild a previously proposed update
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: upstream-updates
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    outputs:
+      candidate: ${{ steps.prepare.outputs.candidate }}
+      import_ok: ${{ steps.prepare.outputs.import_ok }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check source metadata and publish the status report
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node check-updates.mjs
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add updates.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update upstream firmware status'
+            git push origin HEAD:main
+            gh workflow run pages.yml --ref main
+          fi
+      - name: Prepare a pinned candidate branch
+        id: prepare
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SPOKES_FORCE_UPDATE: ${{ inputs.force || false }}
+        run: |
+          git switch -C bot/upstream-updates
+          node prepare-updates.mjs
+          if [ ! -f UPSTREAM-UPDATES.md ]; then exit 0; fi
+          git add upstreams.json catalogue.js index.html vendor VALIDATION.md UPSTREAM-UPDATES.md UPSTREAM-UPDATES.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Propose upstream firmware updates'
+          git push --force-with-lease origin HEAD:refs/heads/bot/upstream-updates
+  validate:
+    needs: scan
+    if: needs.scan.outputs.candidate == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bot/upstream-updates
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Check candidate assets and simulated behavior
+        run: npm test
+  review:
+    needs: [scan, validate]
+    if: always() && needs.scan.result == 'success' && needs.scan.outputs.candidate == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Open or update the review pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VALIDATION: ${{ needs.validate.result }}
+          IMPORT_OK: ${{ needs.scan.outputs.import_ok }}
+        run: |
+          cat > /tmp/spokes-update-pr.md <<EOF
+          SPOKES detected changes to pinned upstream firmware builders and prepared this branch for review.
+
+          Automated source/UI validation: **$VALIDATION**.
+          Upstream sources imported successfully: **$IMPORT_OK**.
+          [Check run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          Review UPSTREAM-UPDATES.md and the adapter changes before merging. CI does not run successful builds with official Elektron OS files or establish hardware compatibility. This pull request is never auto-merged.
+          EOF
+          existing=$(gh pr list --head bot/upstream-updates --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh pr edit "$existing" --body-file /tmp/spokes-update-pr.md
+            if [ "$VALIDATION" != success ] || [ "$IMPORT_OK" != true ]; then gh pr ready "$existing" --undo || true; fi
+          else
+            if [ "$VALIDATION" = success ] && [ "$IMPORT_OK" = true ]; then
+              gh pr create --head bot/upstream-updates --base main --title 'Review upstream firmware updates' --body-file /tmp/spokes-update-pr.md || echo 'PR creation is restricted; review the tested bot/upstream-updates branch. No repository permission is changed.' >> "$GITHUB_STEP_SUMMARY"
+            else
+              gh pr create --draft --head bot/upstream-updates --base main --title 'Review upstream firmware updates' --body-file /tmp/spokes-update-pr.md || echo 'PR creation is restricted; the bot/upstream-updates branch contains an update proposal requiring adaptation. No repository permission is changed.' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi

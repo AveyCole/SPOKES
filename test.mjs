@@ -6,6 +6,8 @@ import vm from 'node:vm';
 const base=new URL('./',import.meta.url);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const manifest=JSON.parse(await readFile(new URL('vendor/manifest.json',base)));
+const registry=JSON.parse(await readFile(new URL('upstreams.json',base)));
+for(const source of registry.sources.filter(s=>s.kind==='built-in'))assert.ok(manifest.files.filter(f=>f.path.startsWith(source.id+'/')).every(f=>f.revision===source.revision&&f.repo===source.repo),'Registry and vendored revisions must match');
 for(const f of manifest.files){const data=await readFile(new URL('vendor/'+f.path,base));assert.equal(sha(data),f.sha256,f.path);assert.equal(data.length,f.bytes);assert.match(f.revision,/^[a-f0-9]{40}$/);assert.doesNotMatch(f.path,/\.(syx|wav|zip)$/i);}
 console.log(`PASS: ${manifest.files.length} upstream assets match their pinned checksums`);
 const context={window:{}};vm.runInNewContext(await readFile(new URL('catalogue.js',base),'utf8'),context);

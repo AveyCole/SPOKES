@@ -59,7 +59,19 @@ Sans fichiers officiels : empreintes des sources, cohérence du catalogue, réf�
 
 ## Updating sources / Actualiser les sources
 
-`sync-upstream.mjs` downloads only explicitly pinned revisions. Review and change its revision together with `catalogue.js`; run it, then run tests. `vendor/manifest.json` records each source path, full commit, size and SHA-256. No automatic upgrade to a moving `main` branch. Never add official or built `.syx`, OS archives, extracted firmware sections or user assets.
+SPOKES checks the listed GitHub sources daily with `.github/workflows/upstream-updates.yml`, independently of Codex or your computer. The flasher's **Firmware updates** section shows the last check, available built-in updates, and when each pinned version was incorporated. Author-hosted installers follow their authors directly; they are labeled separately.
+
+SPOKES vérifie ces sources GitHub chaque jour, sans dépendre de Codex ou de votre ordinateur. La section **Mises à jour** affiche la dernière vérification, les mises à jour intégrées disponibles et la date d'intégration de chaque version. Les programmes des créateurs suivent directement leurs projets et sont identifiés séparément.
+
+Relevant built-in changes produce one review branch with new pinned assets and regenerated references. The workflow opens a pull request if repository policy already permits it; otherwise the flasher links directly to the review branch. No repository permission is broadened. Validation runs in a separate read-only job with no persisted Git credentials. A failed import or validation produces a draft requiring adaptation. Successful software checks still require review before merge; no automatic merge or firmware publication. A repeated unchanged proposal is not recreated daily. Merging the reviewed branch publishes its new incorporated date in the flasher. Existing hardware/build validation claims do not transfer to new revisions. Manual runs can force a retry.
+
+Les changements pertinents préparent une branche de révision avec les sources épinglées et références régénérées. Une pull request est ouverte si la politique du dépôt le permet ; sinon le flasher pointe vers la branche. Aucune permission du dépôt n’est élargie. Les tests tournent séparément, en lecture seule. Un échec produit un brouillon à adapter. Même si les tests logiciels passent, une révision est requise avant publication ; aucune fusion automatique. Les propositions inchangées ne sont pas recréées chaque jour. La fusion publie la nouvelle date d'intégration. Les anciens résultats matériels ne sont pas attribués aux nouvelles versions. Une exécution manuelle peut forcer un nouvel essai.
+
+`updates.json` is the public check report; `upstreams.json` defines the tracked sources and current built-in pins. The first status report is generated at setup; subsequent checks use the repository's standard `GITHUB_TOKEN`. No personal token or official OS files are stored in GitHub Actions.
+
+`updates.json` est le rapport public ; `upstreams.json` définit les sources et révisions intégrées. Les vérifications suivantes utilisent le jeton standard du dépôt, sans jeton personnel ni fichiers OS officiels dans Actions.
+
+`sync-upstream.mjs` downloads only revisions pinned in `upstreams.json`. For a manual update, change that registry together with `catalogue.js`; run the sync, then tests. `vendor/manifest.json` records each source path, full commit, size and SHA-256. No live builder loads a moving upstream branch. Never add official or built `.syx`, OS archives, extracted firmware sections or user assets.
 
 `sync-upstream.mjs` télécharge uniquement les révisions explicitement épinglées. Mettez sa révision et celle du catalogue à jour ensemble, puis exécutez les tests. `vendor/manifest.json` consigne les sources et empreintes. Aucune mise à jour automatique depuis une branche mouvante. N'ajoutez jamais de firmware officiel ou construit ni d'extrait de firmware.
 

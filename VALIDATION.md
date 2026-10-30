@@ -23,6 +23,8 @@ All outputs were checked in memory; no built or official firmware files are incl
 
 ## UI and browser checks
 
+The daily update checker was added on 29 October 2026. Tests cover relevant-code versus README-only changes, partial GitHub failures, author-hosted sources, and the visible incorporated/pending state after a reviewed merge. A real initial scan checked all ten configured sources successfully and found a pending Model27 update. Automated candidate validation uses a separate read-only runner; imports or checks that fail remain draft proposals. New upstream revisions are never auto-merged or given prior hardware-test claims.
+
 - Invalid firmware rejected by every build adapter.
 - Signed-image verifier accepts a local signed fixture byte-for-byte, rejects a mismatched supplied hash, and rejects corruption even when the supplied hash matches the corrupted file.
 - Simulated MIDI: wrong Model:Samples identity sends no firmware; successful transfer closes its session and clears consent; cancellation reports an incomplete update; disconnects restore controls and close the session.

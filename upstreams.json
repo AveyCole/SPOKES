@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "sources": [
+    {
+      "id": "motor",
+      "repo": "nzimas/motorcycles",
+      "kind": "built-in",
+      "revision": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
+      "incorporatedAt": "2026-10-29",
+      "paths": [
+        "docs/patcher.js",
+        "docs/motorcycles.mcpatch",
+        "LICENSE",
+        "README.md",
+        "third-party-notices/LICENSE-Braids",
+        "third-party-notices/LICENSE-Modded-Cycles",
+        "third-party-notices/LICENSE-Model-TG",
+        "third-party-notices/LICENSE-elektron-model-tweaks",
+        "third-party-notices/LICENSE-ms-multi-output"
+      ]
+    },
+    {
+      "id": "tg",
+      "repo": "TinyGregAudio/Model-TG",
+      "kind": "built-in",
+      "revision": "70b39dd6787770ebefc7a2d78dea1678ec012679",
+      "incorporatedAt": "2026-10-29",
+      "paths": [
+        "flasher/elektron.js",
+        "flasher/patch.js",
+        "flasher/model-tg.json",
+        "tweaks/model-cycles_OS1.13/01-latching-mute.json",
+        "LICENSE",
+        "README.md",
+        "tweaks/LICENSE-elektron-model-tweaks"
+      ]
+    },
+    {
+      "id": "mc",
+      "repo": "18nelli18/Modded-Cycles",
+      "kind": "built-in",
+      "revision": "259441967e39b283e458e5027eda27c86a663562",
+      "incorporatedAt": "2026-10-29",
+      "paths": [
+        "docs/flasher/builder.js",
+        "docs/flasher/tweaks.js",
+        "docs/flasher/flasher.js",
+        "docs/flasher/app.js",
+        "LICENSE",
+        "THIRD-PARTY-NOTICES.md",
+        "README.md",
+        "docs/flasher/LICENSE-Braids.txt",
+        "docs/flasher/LICENSE-Model-TG.txt",
+        "docs/flasher/LICENSE-Open303.txt",
+        "docs/flasher/LICENSE-elektron-firmware-tool.txt",
+        "docs/flasher/LICENSE-elektron-model-tweaks.txt",
+        "docs/flasher/LICENSE-ms-multi-output.txt"
+      ]
+    },
+    {
+      "id": "model27",
+      "repo": "durchgemacht/model27",
+      "kind": "built-in",
+      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "incorporatedAt": "2026-10-29",
+      "paths": [
+        "docs/flasher/builder.js",
+        "docs/flasher/composer.js",
+        "docs/flasher/tweaks.js",
+        "LICENSE",
+        "README.md",
+        "THIRD-PARTY-NOTICES.md",
+        "docs/flasher/LICENSE-Braids.txt",
+        "docs/flasher/LICENSE-Control-All-Config.txt",
+        "docs/flasher/LICENSE-Model-TG.txt",
+        "docs/flasher/LICENSE-One-Shot.txt",
+        "docs/flasher/LICENSE-Open303.txt",
+        "docs/flasher/LICENSE-PPPCCC.txt",
+        "docs/flasher/LICENSE-elektron-firmware-tool.txt",
+        "docs/flasher/LICENSE-elektron-model-tweaks.txt",
+        "docs/flasher/LICENSE-ms-multi-output.txt"
+      ]
+    },
+    {
+      "id": "pppccc",
+      "repo": "gialloinfuso/PPPCCC-M-S-Mods",
+      "kind": "built-in",
+      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "incorporatedAt": "2026-10-29",
+      "paths": [
+        "patches/manifest.json",
+        "patches/00-core.json",
+        "patches/01-mute-solo.json",
+        "patches/02-live-mute.json",
+        "patches/03-hold-mute.json",
+        "patches/04-delay-notes.json",
+        "patches/05-reverb-fx.json",
+        "patches/06-delay-fx.json",
+        "patches/07-strum.json",
+        "patches/08-load-meter.json",
+        "patches/09-groove.json",
+        "patches/10-control-mode.json",
+        "patches/11-trig-select.json",
+        "patches/12-fill2.json",
+        "tools/apply_patches.py",
+        "LICENSE",
+        "THIRD-PARTY-NOTICES.md",
+        "README.md"
+      ]
+    },
+    {
+      "id": "supermodel",
+      "repo": "AveyCole/Supermodel",
+      "kind": "author-hosted"
+    },
+    {
+      "id": "machinedrum",
+      "repo": "Talachan12/Elektron-Model-Machinedrum",
+      "kind": "author-hosted"
+    },
+    {
+      "id": "tweaks",
+      "repo": "drumkilla/elektron-model-tweaks",
+      "kind": "author-hosted"
+    },
+    {
+      "id": "elekloader",
+      "repo": "elekloader/elekloader",
+      "kind": "author-hosted"
+    },
+    {
+      "id": "plaits",
+      "repo": "DMDaudio/plaits-on-models",
+      "kind": "external-build"
+    }
+  ]
+}

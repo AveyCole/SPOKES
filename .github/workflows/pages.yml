@@ -24,7 +24,7 @@ jobs:
       - name: Prepare static files
         run: |
           mkdir _site
-          cp index.html hub.css hub.js catalogue.js worker.js pppccc.js README.md VALIDATION.md LICENSE _site/
+          cp index.html hub.css hub.js catalogue.js worker.js pppccc.js update-status.js updates.json upstreams.json README.md VALIDATION.md LICENSE _site/
           cp -R vendor _site/vendor
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
