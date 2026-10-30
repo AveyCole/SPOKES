@@ -32,6 +32,8 @@ All outputs were checked in memory; no built or official firmware files are incl
 
 ## Limits
 
+Model Machinedrum was added as an author-hosted installer on 29 October 2026. Its source guide at commit `70e1483535c5a6919ff170ce3b79ba4a10c066ac` requires the official Cycles 1.13 and Machinedrum UW 1.63 `.syx` files. It reports hardware testing for TRX-B2/TRX-SD and emulation-only validation for TRX-CH. SPOKES does not vendor or rebuild this project. UI checks cover its requirements text, deferred installer loading, picker locking while open, and closing the installer. No hardware result is claimed by SPOKES.
+
 No hardware was flashed or tested. Browser/MIDI simulations and successful builds are not hardware compatibility claims. Model27 combinations and PPPCCC subsets are not exhaustive hardware tests. Plaits' documented integration branch was unavailable (404); no integrated builder is offered. David Caruso's specific TG/Plaits release has no verified source yet. Author-hosted installers are live upstream content, not pinned SPOKES builds.
 
 ## Résumé français

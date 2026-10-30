@@ -20,7 +20,8 @@ function setup(){
 }
 async function ready(x){x.click('[data-id=tg]');x.file('stock');await x.$('build').onclick();await x.$('connect').onclick();x.$('midi-in').value='in';x.$('midi-out').value='out';x.$('confirm').checked=true;x.change('midi-out');x.$('confirm').checked=true;x.$('confirm').onchange();assert.equal(x.$('flash').disabled,false);}
 (async()=>{
- let x=setup();assert.equal(x.d.querySelectorAll('.card').length,11);assert.equal(x.$('transfer-panel').hidden,true);
+ let x=setup();assert.equal(x.d.querySelectorAll('.card').length,12);assert.equal(x.$('transfer-panel').hidden,true);
+ x.click('[data-id=machinedrum]');assert.equal(x.$('existing').hidden,false);assert.equal(x.$('build-panel').hidden,true);assert.equal(x.$('transfer-panel').hidden,true);assert.match(x.$('description').textContent,/Machinedrum UW OS 1.63/);assert.equal(x.$('installer').hasAttribute('src'),false);x.$('open-existing').click();assert.equal(x.$('installer').src,'https://talachan12.github.io/Elektron-Model-Machinedrum/');assert.equal(x.d.querySelector('[data-id=tg]').disabled,true);x.$('close-installer').click();assert.equal(x.$('installer').hasAttribute('src'),false);assert.equal(x.d.querySelector('[data-id=tg]').disabled,false);
  x.click('[data-id=mc]');assert.equal(x.$('syntakt-row').hidden,false);x.file('stock');assert.equal(x.$('build').disabled,true);x.file('syntakt');assert.equal(x.$('build').disabled,false);
  x.click('[data-id=pppccc]');assert.equal(x.$('pppccc-options').hidden,false);assert.equal(x.d.querySelectorAll('[name=pppccc]:checked').length,12);
  x.click('[data-id=david]');assert.equal(x.$('transfer-panel').hidden,true);assert.equal(x.$('build-panel').hidden,true);

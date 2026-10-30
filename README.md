@@ -14,6 +14,7 @@ Un sélecteur communautaire et programme de mise à jour pour Elektron Model:Cyc
 | Model-TG 1.1.0 | Local browser builder / Construction locale | [TinyGregAudio/Model-TG](https://github.com/TinyGregAudio/Model-TG) |
 | Modded Cycles 2.0 | Local browser builder; requires the user's official Syntakt OS too / Construction locale, nécessite aussi l'OS Syntakt officiel | [18nelli18/Modded-Cycles](https://github.com/18nelli18/Modded-Cycles) |
 | Model27 | Local machine composer: SAMPLE, Digital Delay, POTS, Control All Config / Composition locale | [durchgemacht/model27](https://github.com/durchgemacht/model27) |
+| Model Machinedrum | Author-hosted patcher; requires official Cycles 1.13 and Machinedrum UW 1.63 files; follow upstream MIDI IN installation / Programme du créateur, deux OS officiels requis, installation MIDI IN | [Talachan12/Elektron-Model-Machinedrum](https://github.com/Talachan12/Elektron-Model-Machinedrum) |
 | PPPCCC 2.1.0 | Local selectable mods; dependencies added automatically / Mods locaux sélectionnables, dépendances automatiques | [gialloinfuso/PPPCCC-M-S-Mods](https://github.com/gialloinfuso/PPPCCC-M-S-Mods) |
 | Stock OS 1.13 | Validates and restores the user's original file / Vérifie et restaure le fichier officiel fourni | [Elektron](https://www.elektron.se/support-downloads/modelcycles) |
 | A.V. Supermodel | Existing local installer embedded on request, Full/Lite and Optional link / Programme existant intégré à la demande | [AveyCole/Supermodel](https://github.com/AveyCole/Supermodel) |
