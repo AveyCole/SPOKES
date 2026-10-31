@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-10-30T18:02:06.311Z",
+  "checkedAt": "2026-10-31T17:15:54.757Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -42,10 +42,10 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "c7b1f4632de0004882c0055325c8515599b2e053",
-      "upstreamUpdatedAt": "2026-10-30T16:50:44Z",
+      "latest": "d3a616b3c5d01793ff3a9d4d54e6f45c9d9f1026",
+      "upstreamUpdatedAt": "2026-10-31T04:16:03Z",
       "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...c7b1f4632de0004882c0055325c8515599b2e053",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...d3a616b3c5d01793ff3a9d4d54e6f45c9d9f1026",
       "state": "update-available"
     },
     {
@@ -66,8 +66,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "08a3818ecf1741bd2fa95a1b412003e970c53fc5",
-      "upstreamUpdatedAt": "2026-10-30T17:35:07Z",
+      "latest": "a08007326c5023cb533b5d032b2e93caa91f7050",
+      "upstreamUpdatedAt": "2026-10-31T11:40:12Z",
       "sourceUrl": "https://github.com/AveyCole/Supermodel",
       "state": "author-hosted"
     },
