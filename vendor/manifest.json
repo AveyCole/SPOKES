@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-10-29",
+  "imported": "2026-11-01",
   "files": [
     {
       "path": "motor/docs/patcher.js",
@@ -236,7 +236,7 @@
     {
       "path": "model27/docs/flasher/builder.js",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/builder.js",
       "sha256": "c6bd8c055df3a4a8576bc1b71d46553a699424f691ebd1bf145232ac0135dfee",
       "bytes": 45937
@@ -244,23 +244,23 @@
     {
       "path": "model27/docs/flasher/composer.js",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/composer.js",
-      "sha256": "7495077d9800aa08faaff0a7cb41b07afedce395eee80e1a970e4b46f59de704",
-      "bytes": 53838
+      "sha256": "c3972eeab555a1a1aca4128bb2a35239c9439e24702cc1a28dfddda9d4227bfa",
+      "bytes": 63940
     },
     {
       "path": "model27/docs/flasher/tweaks.js",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/tweaks.js",
-      "sha256": "f311aa6c336dc72950c4a7b0713af188b3f53812922f3af81c7008cc64abe164",
-      "bytes": 179623
+      "sha256": "9b8bda897dcead8c8963294f0de0c8abd40d424156ec41858319828fe3a9795d",
+      "bytes": 258718
     },
     {
       "path": "model27/LICENSE",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "LICENSE",
       "sha256": "e5f50b09c2cd3c0a49893103412a668a471d5d7f20d5855e8ec65f9d862305ce",
       "bytes": 1139
@@ -268,23 +268,23 @@
     {
       "path": "model27/README.md",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "README.md",
-      "sha256": "59215dd9ef38e1bd752cf05d2f4dcf3c85cabe3a052d9689f2c41d5780979566",
-      "bytes": 15012
+      "sha256": "08b2245ef0cd07e2f63ecca5fcfa8641d7732dce4977e8625b33deae817e67a7",
+      "bytes": 16288
     },
     {
       "path": "model27/THIRD-PARTY-NOTICES.md",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "THIRD-PARTY-NOTICES.md",
-      "sha256": "b5a29da9c4e01c36e9ffbc1320a767e17a6969220c98ec2840f6f35516c02fd0",
-      "bytes": 9191
+      "sha256": "ba83665dc716b6f22088f7bb6d6bf6f6c007464e425de1d5d2d78c3a6bfab0c7",
+      "bytes": 9159
     },
     {
       "path": "model27/docs/flasher/LICENSE-Braids.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-Braids.txt",
       "sha256": "51ea25298ae08aa5c814fbc151715f9f426bbd1c2934c1c091e558e8e70ecf28",
       "bytes": 1322
@@ -292,7 +292,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-Control-All-Config.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-Control-All-Config.txt",
       "sha256": "673bde56f7aa69a0fcf92ba8a9ccbee0498fd6621488a79949c38b49960c8e3d",
       "bytes": 1080
@@ -300,7 +300,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-Model-TG.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-Model-TG.txt",
       "sha256": "ccbebdf881a15936c407c18c85c6d43725b7943d33cf8e9f43e24a9a2425153d",
       "bytes": 1364
@@ -308,7 +308,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-One-Shot.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-One-Shot.txt",
       "sha256": "673bde56f7aa69a0fcf92ba8a9ccbee0498fd6621488a79949c38b49960c8e3d",
       "bytes": 1080
@@ -316,7 +316,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-Open303.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-Open303.txt",
       "sha256": "44e56167c8c5d9305ddb5622d062a3f45ee0c672b8c5d51b1d88905f3b8f6197",
       "bytes": 1351
@@ -324,7 +324,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-PPPCCC.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-PPPCCC.txt",
       "sha256": "8e05c1e753d8707d7f104bc1c5996ea41e8056f3d7b515ac13e68a6f5721aef7",
       "bytes": 1227
@@ -332,7 +332,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-elektron-firmware-tool.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-elektron-firmware-tool.txt",
       "sha256": "35ae461c853f98495e1a6c7bc2b0625cb89cb2b846a80b0747ba9b0d76f28f8b",
       "bytes": 1072
@@ -340,7 +340,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-elektron-model-tweaks.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-elektron-model-tweaks.txt",
       "sha256": "2b2390f7ab2be71d7e3f0ee0e5279c0bc814037652c7fe08dfb77cc2c3e6d8f4",
       "bytes": 1066
@@ -348,7 +348,7 @@
     {
       "path": "model27/docs/flasher/LICENSE-ms-multi-output.txt",
       "repo": "durchgemacht/model27",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
       "source": "docs/flasher/LICENSE-ms-multi-output.txt",
       "sha256": "5f13db5fca651e4091b002c55052b80c41ad7181a414b6eace3a70b2e3da7ba4",
       "bytes": 1070
@@ -356,23 +356,23 @@
     {
       "path": "pppccc/patches/manifest.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/manifest.json",
-      "sha256": "004c6b0949c14e7ca03a82c92c3888e7979203a04aea344549aae1cfaad096e5",
-      "bytes": 1303
+      "sha256": "220e0b4f5cced4594c935508996a9d477a4ce461ced44181713e12b65ae8ced7",
+      "bytes": 1429
     },
     {
       "path": "pppccc/patches/00-core.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/00-core.json",
-      "sha256": "c5de2d8d287a4c70be5bd1574f579c8ed6bad06459ed934dc162bf0873b558ef",
-      "bytes": 7515
+      "sha256": "4642c30f9f549766d91a052300ed5aa23b6f42c968c6e5fd67ff55450e6fa64b",
+      "bytes": 11488
     },
     {
       "path": "pppccc/patches/01-mute-solo.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/01-mute-solo.json",
       "sha256": "45d70fb72e4f512097a2ef142a7888c5863d50eef381801e2195635ab604ede7",
       "bytes": 1892
@@ -380,7 +380,7 @@
     {
       "path": "pppccc/patches/02-live-mute.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/02-live-mute.json",
       "sha256": "67ba1550a8ddeac66a2ea0157afd4d79e8c6cbcac33d7e1bfd5b51ca10728cd6",
       "bytes": 1232
@@ -388,7 +388,7 @@
     {
       "path": "pppccc/patches/03-hold-mute.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/03-hold-mute.json",
       "sha256": "3815c4562c9a8bc20b9031ef0ae9c776eca6b55a3595392592e6196178f1d379",
       "bytes": 3512
@@ -396,7 +396,7 @@
     {
       "path": "pppccc/patches/04-delay-notes.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/04-delay-notes.json",
       "sha256": "fc6e8e898812d3152f170e0d79af5375aa2773933c3c4b7b28cee30f415b9e1e",
       "bytes": 2707
@@ -404,7 +404,7 @@
     {
       "path": "pppccc/patches/05-reverb-fx.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/05-reverb-fx.json",
       "sha256": "2359566dd7790eb6521be09f2d06a6668470da2edba397cbcbaeada801c192fb",
       "bytes": 10548
@@ -412,7 +412,7 @@
     {
       "path": "pppccc/patches/06-delay-fx.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/06-delay-fx.json",
       "sha256": "5aed6104fd1cc93801e56bb1ad60bc8bde7980947f48f45e43d19a84b9632fa1",
       "bytes": 10105
@@ -420,7 +420,7 @@
     {
       "path": "pppccc/patches/07-strum.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/07-strum.json",
       "sha256": "98a02d141fef0fb953b4c5049c6ec1b04024099536ba10332e13d465b6988df4",
       "bytes": 3324
@@ -428,7 +428,7 @@
     {
       "path": "pppccc/patches/08-load-meter.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/08-load-meter.json",
       "sha256": "6d2b7119ae8bd9d7861bb69f275de5a789b6b2996bc6efbed0f3c4b63d2ecd4e",
       "bytes": 4103
@@ -436,7 +436,7 @@
     {
       "path": "pppccc/patches/09-groove.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/09-groove.json",
       "sha256": "6d1dc3a0d8bfa4d9766879b397d0516f6a1204d055ace3874340af84ef45035a",
       "bytes": 9503
@@ -444,7 +444,7 @@
     {
       "path": "pppccc/patches/10-control-mode.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/10-control-mode.json",
       "sha256": "dafdf8ae4036bd6bf391a99e9ce74d00312bddcc64c1196bc8fbd62099578f0c",
       "bytes": 4725
@@ -452,7 +452,7 @@
     {
       "path": "pppccc/patches/11-trig-select.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/11-trig-select.json",
       "sha256": "8e67dacf129f82b8e20949d2a66e8b3ebdb40b39a19f376245be347eb0051282",
       "bytes": 7271
@@ -460,7 +460,7 @@
     {
       "path": "pppccc/patches/12-fill2.json",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "patches/12-fill2.json",
       "sha256": "cebf862828a348299c5c8fe5fb7e8dc7a38fbab292cabc5a9c26355de218ab54",
       "bytes": 5090
@@ -468,7 +468,7 @@
     {
       "path": "pppccc/tools/apply_patches.py",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "tools/apply_patches.py",
       "sha256": "15d76f4c25315b4dd49589d8a3cc230627862f253bae7d0b68091b1385c8b7ab",
       "bytes": 7806
@@ -476,7 +476,7 @@
     {
       "path": "pppccc/LICENSE",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "LICENSE",
       "sha256": "8e05c1e753d8707d7f104bc1c5996ea41e8056f3d7b515ac13e68a6f5721aef7",
       "bytes": 1227
@@ -484,18 +484,18 @@
     {
       "path": "pppccc/THIRD-PARTY-NOTICES.md",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "THIRD-PARTY-NOTICES.md",
-      "sha256": "42fa123df9529552991f1979e5172bbddf0c9d9e42680ae686c0f4fa2e48f30f",
-      "bytes": 1995
+      "sha256": "9d6b5f48c2bf880c98e1965e5afab2d83b4d0fe4600cedeb80fc9e43f6d29ede",
+      "bytes": 2268
     },
     {
       "path": "pppccc/README.md",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
       "source": "README.md",
-      "sha256": "af46140b88b55759d62d9b117e374915f7f0793dbce9aaa25a4d8e2417249741",
-      "bytes": 17955
+      "sha256": "e77c78c754c011f01e29911c4d211d88fc52d5797012aa57e7c20ebece21e2c6",
+      "bytes": 21090
     }
   ]
 }

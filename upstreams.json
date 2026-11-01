@@ -61,8 +61,8 @@
       "id": "model27",
       "repo": "durchgemacht/model27",
       "kind": "built-in",
-      "revision": "da939aedb4f48cf4c11376431d4b58811fc87696",
-      "incorporatedAt": "2026-10-29",
+      "revision": "06cc7028f58db946fae22d59cd38d28171b9572c",
+      "incorporatedAt": "2026-11-01",
       "paths": [
         "docs/flasher/builder.js",
         "docs/flasher/composer.js",
@@ -85,8 +85,8 @@
       "id": "pppccc",
       "repo": "gialloinfuso/PPPCCC-M-S-Mods",
       "kind": "built-in",
-      "revision": "c6d0176485baebc375ca5f97b30699b44aabe53e",
-      "incorporatedAt": "2026-10-29",
+      "revision": "43b894bd14f55313cef6381af9a008acec3ed0f1",
+      "incorporatedAt": "2026-11-01",
       "paths": [
         "patches/manifest.json",
         "patches/00-core.json",

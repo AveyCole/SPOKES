@@ -1,0 +1,15 @@
+{
+  "format": 1,
+  "changes": [
+    {
+      "id": "model27",
+      "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
+      "latest": "06cc7028f58db946fae22d59cd38d28171b9572c"
+    },
+    {
+      "id": "pppccc",
+      "pinned": "c6d0176485baebc375ca5f97b30699b44aabe53e",
+      "latest": "43b894bd14f55313cef6381af9a008acec3ed0f1"
+    }
+  ]
+}

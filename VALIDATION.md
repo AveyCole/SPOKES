@@ -1,3 +1,7 @@
+<!-- upstream-validation -->
+> Upstream source pins changed on 2026-11-01. Automated checks cover source integrity and simulated behavior only. The successful official-file builds and hardware status recorded below apply to the prior revisions, not these new assets. Review this branch and repeat official-file builds before merging.
+<!-- /upstream-validation -->
+
 # SPOKES 0.1.0 — 29 October 2026
 
 ## Local software validation
