@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-02T21:43:26.783Z",
+  "checkedAt": "2026-11-03T19:30:50.802Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -9,9 +9,10 @@
       "kind": "built-in",
       "pinned": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
       "incorporatedAt": "2026-10-29",
-      "latest": "d8468f64510216472c17a27f3ad3d82ff99bbef7",
-      "upstreamUpdatedAt": "2026-10-27T09:58:38Z",
+      "latest": "82a37407f838506dfa521ac87adbfcb0786f6bc1",
+      "upstreamUpdatedAt": "2026-11-03T04:14:08Z",
       "sourceUrl": "https://github.com/nzimas/motorcycles",
+      "compareUrl": "https://github.com/nzimas/motorcycles/compare/d8468f64510216472c17a27f3ad3d82ff99bbef7...82a37407f838506dfa521ac87adbfcb0786f6bc1",
       "state": "current"
     },
     {
@@ -42,10 +43,10 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "54b7095570cd9b8f244332351e569c91ed88f702",
-      "upstreamUpdatedAt": "2026-11-02T18:39:42Z",
+      "latest": "3b4e9721d056057052aa8c102aea1c9fe495919b",
+      "upstreamUpdatedAt": "2026-11-02T22:51:31Z",
       "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...54b7095570cd9b8f244332351e569c91ed88f702",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...3b4e9721d056057052aa8c102aea1c9fe495919b",
       "state": "update-available"
     },
     {
@@ -66,8 +67,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "84fbcac20f7dbf1e7b7f4dc6e219932ebc796d2d",
-      "upstreamUpdatedAt": "2026-11-02T21:20:45Z",
+      "latest": "963c2c2ad67a1b9f03b44e2b0ba13ac53e15d33d",
+      "upstreamUpdatedAt": "2026-11-03T17:57:59Z",
       "sourceUrl": "https://github.com/AveyCole/Supermodel",
       "state": "author-hosted"
     },
@@ -99,8 +100,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "6910d2aee0173b1249ce10d635c15e2f88b000c7",
-      "upstreamUpdatedAt": "2026-11-02T05:25:16Z",
+      "latest": "9ae9aee85bd37fbad50ee5d007a48f7b0f8e37dc",
+      "upstreamUpdatedAt": "2026-11-03T17:36:40Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
