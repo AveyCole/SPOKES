@@ -7,8 +7,8 @@ official OS.**
   combination, put together when you build. Nothing is pre-built, and no machine rules out another.
 - **What goes together is checked.** Every mod declares what it touches; the builder checks each build and stops one
   that would write the same bytes or use the same memory, instead of making a firmware.
-- **It still plays like a Model:Cycles.** Extra values sit on one fixed set of shortcuts, RETRIG + a knob, and
-  on/off switches on RETRIG + PUNCH or GATE, the same on every machine and saved with the sound.
+- **It still plays like a Model:Cycles.** Extra values sit on one fixed set of shortcuts, MACHINES + a knob, and
+  on/off switches on MACHINES + PUNCH or GATE, the same on every machine and saved with the sound.
 - **Tested means played on a real Model:Cycles.** Before a mod reaches the flasher, it runs in an emulator on the
   Model:Cycles' own code. Its card says Experimental until it has been played on the device, and Tested after.
 - **Your files stay yours.** The firmware is built in your browser from your own official OS file, nothing is
@@ -23,13 +23,29 @@ Model:Cycles over USB. Modded-Cycles has since moved to a single OS with 2.0; mo
 together, so that a new machine fits next to the others. The rules a mod follows for that are the
 **[Cycles Mod Standard](https://github.com/durchgemacht/cycles-mod-standard)** (draft 0.5), written alongside.
 
-**Status: beta, release 0.15.** The [web flasher](https://durchgemacht.github.io/model27/flasher/) offers four
-cards, all tested on a Model:Cycles as the page builds them: the **SAMPLE** machine of
+**Status: beta, release 0.51.** The [web flasher](https://durchgemacht.github.io/model27/flasher/) offers fourteen
+cards, all of them tested on a Model:Cycles as the page builds them: the **SAMPLE** machine of
 [Cycles One-Shot](https://github.com/durchgemacht/cycles-one-shot), a one-shot sampler for samples on the +Drive,
 [Control All Config](https://github.com/durchgemacht/cycles-control-all-config), **Digital Delay**, the first
-effect: a second delay for the delay slot, chosen per pattern with TRACK + Delay Time, based on the digital delay of
-[gialloinfuso's PPPCCC mods](https://github.com/gialloinfuso/PPPCCC-Model-Cycles-1.13-Mods), and **POTS**, model27's
-own second effect: a delay whose repeats go down an old telephone line. The
+effect: a second delay for the delay slot, chosen per pattern with PATTERN + Delay Time, based on the digital delay of
+[gialloinfuso's PPPCCC mods](https://github.com/gialloinfuso/PPPCCC-M-S-Mods), and **POTS** (since 0.38 its line
+at 6 kHz, for about a third of the load), model27's own second effect: a delay whose repeats go
+down an old telephone line. The fifth, **Trig conditions, A:B before
+the percentages**, model27's own, puts the A:B conditions before the percentages on the knob, the five dots under the
+value following. The sixth, **Trig preview** by
+[drumkilla](https://github.com/drumkilla/elektron-model-tweaks), plays a held trig's step when you press PAGE with the
+sequencer stopped. The seventh, **Samples**, the first Track FX, puts SAMPLE's filter, the Model:Samples' own, on
+any track after Volume + Dist, chosen per sound. The eighth, **Crush**, model27's own second Track FX, lowers a
+track's sample rate and bits on two knobs. The ninth to eleventh are model27's own Track FX too: **Ring**, a ring
+modulator (the carrier's note, the mix and its wave on three knobs), **Reso**, a tuned resonator that makes a track
+ring at a pitch you set, like a plucked string or a struck tube, and **EQ**, a three-band equalizer: a Mid you can
+sweep and Low and High shelves. The twelfth, the **CPU page**, model27's own, its page built as
+[Model-TG](https://github.com/TinyGregAudio/Model-TG)'s System page, shows in SETTINGS how much of the Model:Cycles'
+time the sound takes, with the Track FX' and the effects' shares. The thirteenth, **RESAMPLE**, model27's own, its page and its save built as Model-TG builds its own, records a track, the main mix or USB on a page
+opened with SETTINGS + RECORD and saves the take as a sample in /recordings, named in the stock name editor, ready for
+SAMPLE. The fourteenth, **Transpose**, model27's own: with MACHINES held, TRIG 15 and 16 move the notes
+of the TRIG keys by octaves and TRIG 8, 9, 11 and 12 make the active track jump in pitch at once, the keys' lights
+dimmed to show it. The
 [guide](https://durchgemacht.github.io/model27/guide/) explains them. Combining machines is proven with two internal
 reference machines: SAMPLE with the first one on a Model:Cycles; the second one, with a shortcut, and sharing the
 main screen, the knob view, the screen's tick and the browser with SAMPLE, in emulation so far, composed by the page
@@ -51,8 +67,8 @@ machines get in. These are **Gen 1 machines**, as the
 [Cycles Mod Standard](https://github.com/durchgemacht/cycles-mod-standard) describes them today:
 
 - four knobs of their own, with DECAY, GATE and PUNCH working as on the stock machines;
-- up to four extra parameters, all on the same fixed shortcuts (RETRIG held + COLOR, SHAPE, SWEEP or CONTOUR),
-  and up to two on/off switches (RETRIG held + PUNCH or GATE), identical on every machine and saved with the sound;
+- up to four extra parameters, all on the same fixed shortcuts (MACHINES held + COLOR, SHAPE, SWEEP or CONTOUR),
+  and up to two on/off switches (MACHINES held + PUNCH or GATE), identical on every machine and saved with the sound;
 - they only hook into the parts of the OS the builder already knows how to share.
 
 The result still plays like a Model:Cycles. This is all at an early stage, and it will keep evolving. If more
@@ -74,15 +90,23 @@ manifest that says what it touches, and the builder composes the packages you ti
 
 ## Shortcuts are predefined
 
-A machine does not choose its own key combinations. model27 gives a fixed list, today **RETRIG held + COLOR, SHAPE,
-SWEEP or CONTOUR**: up to four extra values on the machine's tracks, and **RETRIG held + PUNCH or GATE**: up to two
-switches, on or off. For a value, the machine declares its name, range and default in its manifest; the builder
-handles the keys, shows the value and saves it with the sound, and the machine only reads it. A switch flips on the
-press, instead of PUNCH or GATE on that machine's tracks; while RETRIG is held, PUNCH's and GATE's lights show the
-switches, and the machine shows them on the screen if it wants. Each machine gives a shortcut its own meaning, so
-two machines can use the same one without meeting. The list will probably grow, most likely by FUNC + the same four
-knobs. For now shortcut values and switches cannot be p-locked or used as LFO destinations, and no card on the page
-uses a shortcut yet.
+A machine does not choose its own key combinations. model27 gives a fixed list, today **MACHINES held + COLOR, SHAPE,
+SWEEP or CONTOUR**: up to four extra values on the machine's tracks, and **MACHINES held + PUNCH or GATE**: up to two
+switches, on or off. For a value, the machine declares its name, range and default in its manifest; the builder handles
+the keys, shows the value and saves it with the sound, and the machine only reads it. A switch flips on the press,
+instead of PUNCH or GATE on that machine's tracks; while MACHINES is held, PUNCH's and GATE's lights show the switches,
+and the machine shows them on the screen if it wants. On such a machine's tracks MACHINES is a held key: a tap still
+opens the machine list, when you let go of it, and holding it for a shortcut leaves the list closed. Each machine gives
+a shortcut its own meaning, so two machines can use the same one without meeting. Since release 0.50 a switch can be
+locked on single steps: hold the steps' TRIG keys and MACHINES, then press PUNCH or GATE. For now shortcut values cannot
+be p-locked, and neither values nor switches can be LFO destinations; SAMPLE's Loop and Reverse are the only switches
+on the page.
+
+The held key says what a combination works on: **PATTERN** the pattern (PATTERN + Delay Time / Reverb Size chooses its
+effects), **MACHINES** the track's machine (its values and switches above), **RETRIG** the track's filter (RETRIG +
+PITCH chooses the sound's filter, RETRIG + SWEEP and CONTOUR set its Cutoff and Reso; unlike a machine's values, these
+can be p-locked, used as LFO destinations and turned with Control All, on every machine). No mod gets a held key of its
+own, and a build has either machine values or filters ([notes/72](notes/72-track-filters.md)).
 
 ## The conditions, roughly
 
@@ -125,6 +149,24 @@ uses a shortcut yet.
 
 Everything runs in your browser: your files are never uploaded anywhere. **Before you flash**, back up your projects
 and samples with Elektron Transfer.
+
+## A project per firmware: the Manager
+
+A project made on one firmware plays other machines on the next, so changing firmware usually means a new project
+each time. The **[Manager](https://durchgemacht.github.io/model27/manager/)** keeps one project per firmware: add the
+`.syx` files you flash (the official OS, the builds you download from the flasher, any build for the Model:Cycles),
+then **Switch** backs up the project the Cycles plays, flashes the other firmware over USB, brings that firmware's
+project back and checks it, and says which slot to save it in. You stop the sequencer and press YES on the Cycles.
+The files and backups stay in your browser; **Export** puts them in one file. How it works: [notes/77](notes/77-manager.md).
+
+## Samples onto the +Drive: the Uploader
+
+The **[Uploader](https://durchgemacht.github.io/model27/uploader/)** puts audio files on the Model:Cycles' +Drive over
+USB, for SAMPLE: drop audio files or whole folders on the left, open a folder of the Cycles on the right, press
+**Upload**. Each file becomes a 48 kHz mono sample, and the folders are made on the Cycles too; rows dragged onto a
+folder on the right go there. It also deletes several samples or folders in one go, and works with the official OS
+too. Close Elektron Transfer
+first. It is Cycles One-Shot's upload page, moved here.
 
 ## Building from the command line
 

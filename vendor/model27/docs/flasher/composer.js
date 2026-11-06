@@ -25,8 +25,8 @@
  * variables; fxCost() is compose.fx_cost(), and a build whose slot passes FX_REFUSE is refused.
  *
  * C2 (notes/65): the declared claims. A package's and a part's come with them (tools/claims.py's to_json form), the
- * tweaks' as a map by id. claimClashes() is claims.clashes(): the same saved slot, key combination, descriptor or
- * formatter, so a build also conflicts with the tweaks whose claims clash with its own, and a build whose own packages
+ * tweaks' as a map by id. claimClashes() is claims.clashes(): the same saved slot, key combination, descriptor,
+ * formatter or picture, so a build also conflicts with the tweaks whose claims clash with its own, and a build whose own packages
  * clash is refused.
  *
  * License: MIT (the repository's LICENSE).
@@ -43,6 +43,7 @@ const FX_LINE_MAX = 0x400000;                     // compose.FX_LINE_MAX: a slot
 const BLOCK_INSTR = 108225;                       // compose.BLOCK_INSTR: instructions in a block (notes/68 §17)
 const FX_WARN = Math.floor(BLOCK_INSTR / 10), FX_REFUSE = Math.floor(BLOCK_INSTR / 4);
 const FX_PEAK_WARN = Math.floor(BLOCK_INSTR / 2);
+const FILTER_POINT = "track.filter";              // compose.FILTER_POINT: the filter slot (notes/72)
 
 function fromHex(s) {
   // two hexadecimal digits per byte, as everywhere in the page (builder.js); anything else is refused
@@ -356,7 +357,7 @@ function shortcutUses(packages, part) {
 }
 
 // compose.shortcut_presses(): the switches each machine declares (notes/63 §16), one byte per machine, bit 0
-// RETRIG + PUNCH, bit 1 RETRIG + GATE.
+// MACHINES + PUNCH, bit 1 MACHINES + GATE.
 function shortcutPresses(packages, part) {
   const sc = part.shortcut;
   return packages.map((p) => {
@@ -377,9 +378,10 @@ function shortcutPresses(packages, part) {
 // compose.shortcut_layer(): the part placed at at, its data block after its code (the next of each record function's
 // chain, the descriptor table, the machines, their presses, their shortcuts per knob, the strings), the knob lookup's
 // vtable entry and the three sound record functions jumping into it, and with a switch the function PUNCH's and
-// GATE's presses call and MainScreenView's LED method; a package's wrapper over a record function becomes the next
-// of the chain and its write is left out. Returns { blob, symbols, writes, skip, info }.
-function shortcutLayer(mainOs, part, packages, symsOf, uses, at, codeEnd, first, descn) {
+// GATE's presses call and MainScreenView's LED method; since the layer's 0.5 the pattern's p-lock rows in every build
+// with the layer (0x4005b998, 0x4005baca, 0x4005aa34; the filter slot's up to its 0.10); a package's wrapper over a
+// record function becomes the next of the chain and its write is left out. Returns { blob, symbols, writes, skip, info }.
+function shortcutLayer(mainOs, part, packages, symsOf, uses, at, codeEnd, first, descn, every = false) {
   const d = part.data, sc = part.shortcut, sites = part.sites;
   if (packages.length > d.max_machines)
     throw new Error(`${packages.length} machines: the shortcut layer's tables hold ${d.max_machines}`);
@@ -423,6 +425,7 @@ function shortcutLayer(mainOs, part, packages, symsOf, uses, at, codeEnd, first,
   head[d.first] = first;
   head[d.count] = packages.length;
   presses.forEach((v, j) => { head[d.presses + j] = v; });
+  head[d.every] = every ? 1 : 0;                  // the layer's 0.6: MACHINES a held key on every track (Transpose)
   const data = concat(head, entries, ...[...addr.keys()].map(asciiz));
   if (dataAt + data.length > codeEnd) throw new Error(`the shortcut layer ends at ${hx(dataAt + data.length)}, past ${hx(codeEnd)}`);
   const { code, symbols } = placePart(part, at, codeEnd, { shortcut_data: dataAt });
@@ -435,20 +438,35 @@ function shortcutLayer(mainOs, part, packages, symsOf, uses, at, codeEnd, first,
   for (const s of sites.record)
     writes.push({ off: parseInt(s.at, 16) - BASE, old: s.stock,
                   new: hex(concat(bytesOf(0x4e, 0xf9), be32(symbols[s.symbol]), bytesOf(0x4e, 0x71))) });
-  if (presses.some((v) => v))                     // the press and the LEDs, only in the builds with a switch
-    for (const s of sites.press) {
-      const va = parseInt(s.at, 16), here = hex(mainOs.subarray(va - BASE, va - BASE + 6));
-      if (here !== s.stock) throw new Error(`${hx(va)}: ${s.stock} expected, ${here} found`);
-      for (const p of packages)
-        if (p.uses.some((u) => "hook" in u && parseInt(u.hook.at, 16) === va))
-          throw new Error(`${p.id}: hooks ${hx(va)}, which the shortcut layer takes for the switches`);
-      const op = { jmp: bytesOf(0x4e, 0xf9), jsr: bytesOf(0x4e, 0xb9) }[s.op];
-      writes.push({ off: va - BASE, old: s.stock, new: hex(concat(op, be32(symbols[s.symbol]))) });
-    }
+  // MACHINES as a modifier on the machines' tracks (the key map, the layer's 0.4), in every build with the layer; the
+  // press and the LEDs, only in the builds with a switch
+  for (const s of (sites.keys || []).concat(presses.some((v) => v) ? sites.press : [])) {
+    const va = parseInt(s.at, 16), here = hex(mainOs.subarray(va - BASE, va - BASE + 6));
+    if (here !== s.stock) throw new Error(`${hx(va)}: ${s.stock} expected, ${here} found`);
+    for (const p of packages)
+      if (p.uses.some((u) => "hook" in u && parseInt(u.hook.at, 16) === va))
+        throw new Error(`${p.id}: hooks ${hx(va)}, which the shortcut layer takes`);
+    const op = { jmp: bytesOf(0x4e, 0xf9), jsr: bytesOf(0x4e, 0xb9) }[s.op];
+    writes.push({ off: va - BASE, old: s.stock, new: hex(concat(op, be32(symbols[s.symbol]))) });
+  }
+  // the pattern's p-lock rows (the layer's 0.5): k 23..31 on rows 24..32, k 32, the switches, on row 18
+  const cv = sites.conv, pt = sites.ptab, cva = parseInt(cv.jmp, 16), tab = parseInt(pt.stock, 16);
+  const cvHere = hex(mainOs.subarray(cva - BASE, cva - BASE + 6));
+  if (cvHere !== cv.stock) throw new Error(`${hx(cva)}: ${cv.stock} expected, ${cvHere} found`);
+  for (const a of [cv.jmp].concat(pt.operands))
+    for (const p of packages)
+      if (p.uses.some((u) => "hook" in u && parseInt(u.hook.at, 16) === parseInt(a, 16)))
+        throw new Error(`${p.id}: hooks ${a}, which the shortcut layer takes`);
+  writes.push({ off: cva - BASE, old: cv.stock, new: hex(concat(bytesOf(0x4e, 0xf9), be32(symbols[cv.symbol]))) });
+  for (const a of pt.operands) {
+    const va = parseInt(a, 16);
+    if (u32(mainOs, va - BASE) !== tab) throw new Error(`${hx(va)}: not the stock table ${hx(tab)}`);
+    writes.push({ off: va - BASE, old: hex(be32(tab)), new: hex(be32(symbols[pt.symbol])) });
+  }
   const switches = presses.reduce((n, v) => n + (v & 1) + ((v >> 1) & 1), 0);
   return { blob: concat(code, new Uint8Array(dataAt - at - code.length), data), symbols, writes, skip,
            info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: data.length, shortcuts: uses.length,
-                   switches } };
+                   switches, every } };
 }
 
 // compose.dispatch_layer(): each point of the part that two or more packages take (their vtable entries, or their
@@ -553,7 +571,7 @@ function fxLayer(mainOs, part, effects, symsOf, at, codeEnd, descStock, descUsed
   const { code, symbols } = placePart(part, at, codeEnd, { fx_data: dataAt });
   const writes = [], skip = new Set();
   const sites = Object.entries(slots).filter(([n]) => bySlot[n].length).map(([, s]) => s)
-    .concat(effects.length ? [part.track, part.load, part.init] : []);
+    .concat(effects.length ? [part.track, part.release, part.load, part.init, part.early, part.late] : []);
   for (const s of sites) {
     const va = parseInt(s.hook, 16), here = hex(mainOs.subarray(va - BASE, va - BASE + s.stock.length / 2));
     if (here !== s.stock) throw new Error(`${hx(va)}: ${s.stock} expected, ${here} found`);
@@ -562,6 +580,226 @@ function fxLayer(mainOs, part, effects, symsOf, at, codeEnd, descStock, descUsed
   }
   return { blob: concat(code, new Uint8Array(dataAt - at - code.length), data), symbols, writes, skip,
            info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: data.length, slots: infoSlots } };
+}
+
+// compose.fl_layer(): the filter slot of this build (notes/72): the audio block's call of Volume + Dist,
+// the boot's call of the parameter tables' builder, the knob lookup's vtable entry (in front of the shortcut layer's
+// sc_knob), the encoder handler's question for TRACK (in front of the effect slots' fx_keys, or none), LFO + a knob's
+// own list and the three sound record functions (in front of the layer's wrappers; the pattern's p-lock tables are
+// the layer's since fltslot 0.11). The
+// data block after the part's code: the table of the build's filters by id (entry 0 none) with their type names and
+// their values' names and formatters, the rows of descriptors 1 to n and 5 that fl_boot writes, the neutral words and
+// the layer's wrappers, the state zero, each entry's start words and count of values (fltslot 0.8 and 0.10), then the
+// strings. Returns { blob, symbols, writes, skip, info }.
+const flEntry = (p) => p.uses.find((u) => u.point === FILTER_POINT);
+function flLayer(mainOs, part, filters, symsOf, at, codeEnd, descStock, descUsed, dstride, layerSyms, keysNext, diag = false) {
+  const d = part.data, vals = part.values, ty = part.type;
+  if (filters.length > part.most) throw new Error(`${filters.map((p) => p.id).join(", ")}: ${filters.length} filters, a build holds ${part.most} at most`);
+  const seen = {};
+  for (const p of filters) {
+    const u = flEntry(p);
+    if (has(seen, u.id)) throw new Error(`${seen[u.id]} and ${p.id}: the same filter id ${u.id}`);
+    seen[u.id] = p.id;
+  }
+  const byId = filters.slice().sort((x, y) => flEntry(x).id - flEntry(y).id);
+  if (byId.length + 1 > d.entries) throw new Error(`${byId.length} filters: the part's table holds ${d.entries - 1}`);
+  const n = Math.max(...byId.map((p) => flEntry(p).params.length));
+  const dataAt = align4(at + part.bundle.code.length / 2);
+  const { code, symbols } = placePart(part, at, codeEnd, { fl_data: dataAt });
+  const block = new Uint8Array(d.size), strAt = new Map(), strs = [];
+  let strEnd = dataAt + d.size;
+  const string = (text) => {
+    if (!strAt.has(text)) { strAt.set(text, strEnd); strs.push(asciiz(text)); strEnd += text.length + 1; }
+    return strAt.get(text);
+  };
+  const fmt = (p, prm) => {
+    const f = prm.format;
+    if (has(part.formats, f)) {
+      const v = part.formats[f];
+      return v.startsWith("0x") ? parseInt(v, 16) : symbols[v];
+    }
+    return symsOf[p.id][f];
+  };
+  const names = (p, k) => {                       // a value's names: the filter's own, else the first filter's that has it
+    const src = p && k < flEntry(p).params.length ? p : byId.find((x) => k < flEntry(x).params.length);
+    const prm = flEntry(src).params[k];
+    return [string(prm.long), string(prm.short), fmt(src, prm)];
+  };
+  const rows = [[0, 0, 0, string(ty.none), null]].concat(byId.map((p) => {
+    const u = flEntry(p);
+    return [u.id, symsOf[p.id][u.process], u.reset ? symsOf[p.id][u.reset] : 0, string(u.short), p];
+  }));
+  [rows.length, n, layerSyms.sc_knob, keysNext].forEach((v, j) => put32(block, d.count + 4 * j, v));
+  vals.defaults.forEach((v, j) => { block[d.neutral + 2 * j] = v >>> 8; block[d.neutral + 2 * j + 1] = v & 255; });
+  rows.forEach((r, i) => {                        // each entry's start words (fltslot 0.8): its own, else the neutral
+    const prm = r[4] ? flEntry(r[4]).params : [];
+    for (let k = 0; k < 4; k++) {
+      const v = k < prm.length && has(prm[k], "start") ? prm[k].start : vals.defaults[k];
+      block[d.start + 8 * i + 2 * k] = v >>> 8;
+      block[d.start + 8 * i + 2 * k + 1] = v & 255;
+    }
+    block[d.nvals + i] = prm.length;              // the values it declares (fltslot 0.10): a knob past them shows "---"
+  });
+  part.record.forEach((r, j) => put32(block, d.rec_next + 4 * j, layerSyms[r.next]));
+  put32(block, d.desc, descStock);
+  put32(block, d.desc + 4, descUsed);
+  block[d.diag] = diag ? 1 : 0;
+  rows.forEach(([fid, proc, reset, tag, p], i) => {
+    const e = d.entry + d.entry_size * i;
+    [fid, proc, reset, tag].forEach((v, j) => put32(block, e + 4 * j, v));
+    for (let k = 0; k < n; k++) names(p, k).forEach((v, j) => put32(block, e + 16 + 12 * k + 4 * j, v));
+  });
+  for (let k = 0; k < n; k++) {                   // descriptors 1..n, as the track filter's (notes/47 §3)
+    const [long, short] = names(null, k);
+    [7, vals.sound_slots[k], 0, vals.max, vals.defaults[k], 0, parseInt(vals.cc[k], 16), parseInt(vals.nrpn[k], 16), 0,
+     parseInt(vals.flags, 16), vals.sort[k], long, parseInt(vals.group_name, 16), short]
+      .forEach((v, j) => put32(block, d.rows + 56 * k + 4 * j, v >>> 0));
+  }
+  const five = Array.from({ length: 14 }, (_, j) => u32(mainOs, descStock + dstride * ty.descriptor + 4 * j - BASE));
+  if (five[0] !== 0xffffffff) throw new Error(`descriptor ${ty.descriptor} is not the OS's unused one (machine -1)`);
+  five.splice(1, 8, 0, 0, vals.max, 0, 0, 0xffffffff, 0xffffffff, 0);
+  five[11] = string(ty.long);
+  five[13] = string(ty.short);
+  five.forEach((v, j) => put32(block, d.rows + 56 * vals.descriptors.length + 4 * j, v >>> 0));
+  const data = concat(block, ...strs);
+  if (dataAt + data.length > codeEnd) throw new Error(`the filter slot ends at ${hx(dataAt + data.length)}, past ${hx(codeEnd)}`);
+  const writes = [], skip = new Set();
+  const w = (va, old, nw) => {
+    const here = hex(mainOs.subarray(va - BASE, va - BASE + old.length));
+    if (here !== hex(old)) throw new Error(`${hx(va)}: ${hex(old)} expected, ${here} found`);
+    writes.push({ off: va - BASE, old: hex(old), new: hex(nw) });
+    skip.add(va);
+  };
+  for (const name of ["post", "boot", "keys", "lfo"]) {
+    const s = part[name];
+    w(parseInt(s.hook, 16), fromHex(s.stock), concat(bytesOf(0x4e, 0xb9), be32(symbols[s.symbol])));
+  }
+  for (const s of part.record)
+    w(parseInt(s.at, 16), fromHex(s.stock), concat(bytesOf(0x4e, 0xf9), be32(symbols[s.symbol]), bytesOf(0x4e, 0x71)));
+  w(parseInt(part.knob.vtable, 16), be32(parseInt(part.knob.stock_ptr, 16)), be32(symbols[part.knob.symbol]));
+  return { blob: concat(code, new Uint8Array(dataAt - at - code.length), data), symbols: { ...symbols, fl_data: dataAt },
+           writes, skip, info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: data.length,
+                                 values: n, filters: byId.map((p) => [flEntry(p).id, p.id]) } };
+}
+
+// compose.cpu_layer(): the CPU page (notes/78), the audio interrupt's call of the audio function (0x40059382) to its
+// probe and the end of the device configuration list's constructor (0x40032aee) to its row; its data block starts with
+// the addresses of the filter slot's last average and of the effect slots' running ticks, 0 without that part.
+function cpuLayer(mainOs, part, at, codeEnd, fl, fxs, fltPart, fxPart) {
+  const d = part.data;
+  const dataAt = align4(at + part.bundle.code.length / 2);
+  if (dataAt + d.size > codeEnd) throw new Error(`the CPU page ends at ${hx(dataAt + d.size)}, past ${hx(codeEnd)}`);
+  const { code, symbols } = placePart(part, at, codeEnd, { cpu_data: dataAt });
+  const flAvg = fl ? fl.symbols.fl_data + fltPart.data.avg_t : 0;
+  const fxBusy = fxs ? fxs.symbols.fx_data + fxPart.data.busy : 0;
+  const block = new Uint8Array(d.size);
+  put32(block, d.fl_avg, flAvg);
+  put32(block, d.fx_busy, fxBusy);
+  const writes = [], skip = new Set();
+  for (const [s, va, op] of [[part.probe, parseInt(part.probe.hook, 16), bytesOf(0x4e, 0xb9)],      // jsr cpu_probe
+                             [part.row, parseInt(part.row.jmp, 16), bytesOf(0x4e, 0xf9)]]) {       // jmp cpu_cfg
+    const old = fromHex(s.stock), here = hex(mainOs.subarray(va - BASE, va - BASE + old.length));
+    if (here !== hex(old)) throw new Error(`${hx(va)}: ${hex(old)} expected, ${here} found`);
+    writes.push({ off: va - BASE, old: hex(old), new: hex(concat(op, be32(symbols[s.symbol]))) });
+    skip.add(va);
+  }
+  return { blob: concat(code, new Uint8Array(dataAt - at - code.length), block), symbols, writes, skip,
+           info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: d.size, fl_avg: flAvg,
+                   fx_busy: fxBusy } };
+}
+
+// compose.resample_layer(): the RESAMPLE recorder (notes/79), the audio function's call of the mixer (0x40059872) to
+// its rs_mix, TransportView's toggle of GRID RECORDING (0x40024482) to its rs_key and the key event's code accessor
+// (0x4007240c) to its rs_code; its data block starts with the take's buffer and size in words (the RAM claim after the
+// ring, up to the save's 32 KiB at its end), the ring, each kind of source's level shift and SAMPLE's machine number
+// in the build (0xff without).
+function resampleLayer(mainOs, part, at, codeEnd, sample = 0xff) {
+  const d = part.data;
+  const dataAt = align4(at + part.bundle.code.length / 2);
+  if (dataAt + d.size > codeEnd) throw new Error(`the recorder ends at ${hx(dataAt + d.size)}, past ${hx(codeEnd)}`);
+  const { code, symbols } = placePart(part, at, codeEnd, { rs_data: dataAt });
+  const [lo, hi] = part.ram.map((x) => parseInt(x, 16));
+  const ring = lo, buf = lo + part.ring_bytes, conv = hi - part.conv_bytes;
+  const cap = Math.floor((conv - buf) / 4);
+  const block = new Uint8Array(d.size);
+  put32(block, d.buf, buf);
+  put32(block, d.buf + 4, cap);
+  put32(block, d.buf + 8, ring);
+  put32(block, d.conv, conv);
+  block.set([part.shift.track, part.shift.main, part.shift.usb], d.shift);
+  block[d.sample] = sample;
+  const writes = [], skip = new Set();
+  for (const [s, op, tail] of [[part.mix, bytesOf(0x4e, 0xb9), new Uint8Array(0)],                 // jsr rs_mix
+                               [part.key, bytesOf(0x2f, 0x03, 0x4e, 0xb9),                         // rs_key(uis)
+                                concat(bytesOf(0x58, 0x8f), ...Array(6).fill(bytesOf(0x4e, 0x71)))],
+                               [part.code, bytesOf(0x4e, 0xf9), new Uint8Array(0)]]) {             // jmp rs_code
+    const va = parseInt(s.hook, 16), old = fromHex(s.stock), here = hex(mainOs.subarray(va - BASE, va - BASE + old.length));
+    if (here !== hex(old)) throw new Error(`${hx(va)}: ${hex(old)} expected, ${here} found`);
+    const now = concat(op, be32(symbols[s.symbol]), tail);
+    if (now.length !== old.length) throw new Error(`${hx(va)}: ${now.length} bytes for ${old.length}`);
+    writes.push({ off: va - BASE, old: hex(old), new: hex(now) });
+    skip.add(va);
+  }
+  return { blob: concat(code, new Uint8Array(dataAt - at - code.length), block), symbols, writes, skip,
+           info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: d.size, ram: [lo, hi], buf, cap,
+                   ring, conv, sample } };
+}
+
+// compose.transpose_layer(): Transpose, KeyboardView's key handler (its vtable +8, 0x400ff9cc) to tr_keys, the
+// keyboard's read of KBT (0x4001a164) to tr_kbt, the smoother's call (0x400597a8) to tr_pitch and the LED frame's call
+// of the views (0x40006a76) to tr_frame, the panel interrupt's LED step 0 (0x40059dea) to tr_led, and since its 0.3 the
+// three calls of the pattern's reload (0x400107d8) to tr_reload; its data block starts with the shortcut layer's data
+// block's address and holds the dimming's period (the part's n_value).
+function transposeLayer(mainOs, part, at, codeEnd, scData) {
+  const d = part.data, sites = part.sites;
+  const dataAt = align4(at + part.bundle.code.length / 2);
+  if (dataAt + d.size > codeEnd) throw new Error(`Transpose ends at ${hx(dataAt + d.size)}, past ${hx(codeEnd)}`);
+  const { code, symbols } = placePart(part, at, codeEnd, { transpose_data: dataAt });
+  const block = new Uint8Array(d.size);
+  put32(block, d.sc, scData);
+  block[d.n] = d.n_value;
+  const kv = sites.keys, va = parseInt(kv.vtable, 16), method = parseInt(kv.stock_ptr, 16);
+  if (u32(mainOs, va - BASE) !== method) throw new Error(`${hx(va)}: not the stock entry ${hx(method)}`);
+  const writes = [{ off: va - BASE, old: hex(be32(method)), new: hex(be32(symbols[kv.symbol])) }], skip = new Set([va]);
+  for (const key of ["kbt", "pitch", "frame", "led", "reload_tap", "reload_yes", "reload_menu"]) {
+    // jsr tr_kbt, tr_pitch, tr_frame; jmp tr_led and two nops; since 0.3 jsr tr_reload at the reload's three calls
+    const s = sites[key], at_ = parseInt(s.at, 16), old = fromHex(s.stock);
+    const here = hex(mainOs.subarray(at_ - BASE, at_ - BASE + old.length));
+    if (here !== hex(old)) throw new Error(`${hx(at_)}: ${hex(old)} expected, ${here} found`);
+    const op = { jmp: bytesOf(0x4e, 0xf9), jsr: bytesOf(0x4e, 0xb9) }[s.op];
+    let now = concat(op, be32(symbols[s.symbol]));
+    if (old.length < now.length || (old.length - now.length) % 2) throw new Error(`${hx(at_)}: ${old.length} bytes for ${now.length}`);
+    while (now.length < old.length) now = concat(now, bytesOf(0x4e, 0x71));
+    writes.push({ off: at_ - BASE, old: hex(old), new: hex(now) });
+    skip.add(at_);
+  }
+  return { blob: concat(code, new Uint8Array(dataAt - at - code.length), block), symbols, writes, skip,
+           info: { id: part.id, code_at: at, code: code.length, data_at: dataAt, data: d.size, sc_data: scData,
+                   n: d.n_value } };
+}
+
+// compose.fl_cost(): six tracks on the dearest state of the dearest filter, from the filters' declared cost.emulation
+function flCost(filters) {
+  const costs = Object.fromEntries(filters.map((p) => [p.id, Object.fromEntries(Object.entries(
+    ((p.cost || {}).emulation) || {}).filter(([, v]) => Number.isInteger(v)))]));
+  const missing = Object.keys(costs).filter((i) => !Object.keys(costs[i]).length);
+  if (missing.length) return { missing };
+  const top = (i) => Math.max(...Object.values(costs[i]));
+  const dearest = Object.keys(costs).reduce((a, b) => (top(b) > top(a) ? b : a));
+  const steady = 6 * top(dearest);
+  return { dearest, steady, share: steady / BLOCK_INSTR };
+}
+
+// claims.narrowed(): claims without the slots and descriptors another holder's claims hold (the layer in a filter build)
+function narrowed(c, by) {
+  const out = { ...c };
+  for (const key of ["sound_slots", "record_slots", "descriptors"]) {
+    if (!c[key]) continue;
+    const taken = new Set((by[key] || []).map(([n]) => n));
+    out[key] = c[key].filter(([n]) => !taken.has(n));
+    if (!out[key].length) delete out[key];
+  }
+  return out;
 }
 
 // an effect's slot entry (fx.delay or fx.reverb) in its uses, or undefined
@@ -611,7 +849,7 @@ function resolveClaims(c, pid) {
   for (const key of ["sound_slots", "record_slots", "descriptors"])
     if (c[key]) out[key] = c[key].map(([n, t]) => [n, s(t)]);
   if (c.saved) out.saved = c.saved.map(([w, b, t]) => [w, b, s(t)]);
-  if (c.formatters) out.formatters = c.formatters.map(([o, t, k]) => [o, s(t), k]);
+  for (const key of ["formatters", "pictures"]) if (c[key]) out[key] = c[key].map(([o, t, k]) => [o, s(t), k]);
   if (c.views) out.views = c.views.map(([v, t, h]) => [v, s(t), h]);
   if (c.gestures) out.gestures = c.gestures.map((g) => Object.assign({}, g, { scope: s(g.scope) }));
   return out;
@@ -628,9 +866,11 @@ function claimClashes(a, b) {
   const saved = new Set();
   for (const [w, , s] of a.saved || []) for (const [w2, , t] of b.saved || []) if (w === w2 && meet(s, t)) saved.add(w);
   for (const w of [...saved].sort()) out.push(`saved bytes: ${w}`);
-  const objects = new Set();                      // one formatter per interface object: the scope does not narrow it
-  for (const [o] of a.formatters || []) for (const [o2] of b.formatters || []) if (o === o2) objects.add(o);
-  for (const o of [...objects].sort((x, y) => x - y)) out.push(`the formatter of interface object ${o}`);
+  for (const [key, kind] of [["formatters", "formatter"], ["pictures", "picture"]]) {
+    const objects = new Set();                    // one of each per interface object: the scope does not narrow it
+    for (const [o] of a[key] || []) for (const [o2] of b[key] || []) if (o === o2) objects.add(o);
+    for (const o of [...objects].sort((x, y) => x - y)) out.push(`the ${kind} of interface object ${o}`);
+  }
   if (a.plock_rows && b.plock_rows) out.push("the p-lock rows of k >= 23");
   const ma = a.midi || {}, mb = b.midi || {};
   const cc = [...new Set(ma.cc || [])].filter((x) => (mb.cc || []).includes(x)).sort((x, y) => x - y);
@@ -729,9 +969,11 @@ function computedConflicts(writes, ram, declared, tweaks) {
 // packages = compose.web_package() of each machine, in order (machines 6, 7, ...), tweaks = what the conflicts are
 // computed against, parts = compose.web_part() of the builder's parts by id (the shortcut layer, the dispatchers),
 // needed only by the builds that use them, claims = the declared claims of those tweaks by id (tools/claims.py's
-// tweak_claims). Returns { tweak, info }.
-function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {}) {
-  if (!packages.length) throw new Error("name at least one machine");
+// tweak_claims), opts.cpu: with the CPU page (notes/78), opts.resample: with the RESAMPLE recorder (notes/79), each
+// also without any machine. Returns { tweak, info }.
+function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {}, opts = {}) {
+  const cpu = !!opts.cpu, resample = !!opts.resample, transpose = !!opts.transpose;
+  if (!packages.length && !cpu && !resample && !transpose) throw new Error("name at least one machine");
   const ids = packages.map((p) => p.id);
   if (new Set(ids).size !== ids.length) throw new Error("a machine is named twice");
   const lay = frames.layout, pay = lay.pay, first = lay.first;
@@ -740,16 +982,19 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
   // dispatchers') start at the extension when there is one; without one, they are the packages in the order given.
   const kindOf = (p) => {
     const mc = p.uses.find((u) => u.point === "machine"), st = p.uses.find((u) => u.point === "machine.stock");
-    const fx = fxEntry(p);
+    const fx = fxEntry(p), fl = flEntry(p);
     if (mc && st) throw new Error(`${p.id}: an added machine or an extension of a stock machine, not both`);
     if (fx && (mc || st)) throw new Error(`${p.id}: an effect and a machine in uses: an effect is a package of its own`);
-    if (!mc && !st && !fx) throw new Error(`${p.id}: no 'machine', 'machine.stock', 'fx.delay' or 'fx.reverb' entry in uses`);
+    if (fl && (mc || st || fx)) throw new Error(`${p.id}: a filter and a machine or an effect in uses: a filter is a package of its own`);
+    if (!mc && !st && !fx && !fl)
+      throw new Error(`${p.id}: no 'machine', 'machine.stock', 'fx.delay', 'fx.reverb' or '${FILTER_POINT}' entry in uses`);
     if (st && !has(STOCK_EXTENDED, st.machine))
       throw new Error(`${p.id}: machine.stock ${st.machine}: only ${Object.keys(STOCK_EXTENDED).join(", ")} can be extended`);
-    return { mc, st, fx };
+    return { mc, st, fx, fl };
   };
   const added = packages.filter((p) => kindOf(p).mc), exts = packages.filter((p) => kindOf(p).st);
   const effects = packages.filter((p) => kindOf(p).fx);
+  const filters = packages.filter((p) => kindOf(p).fl);
   if (new Set(exts.map((p) => kindOf(p).st.machine)).size !== exts.length)
     throw new Error(`${exts.map((p) => p.id).join(", ")}: two packages extend the same stock machine`);
   const table = exts.concat(added);
@@ -775,7 +1020,7 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
   }
   packages.forEach((p) => {
     const codeAt = align4(codeCursor), bssAt = align4(bssCursor);
-    const { mc, st, fx } = kindOf(p), i = added.indexOf(p);
+    const { mc, st, fx, fl } = kindOf(p), i = added.indexOf(p);
     const values = patchValues(p, mc ? { machine_index: first + i, descriptor_base: 76 + 5 * i }
       : fx && fx.line ? { fx_line: lines[fx.point][0] } : {});
     const { blob, symbols: syms, bssEnd } = place(p.bundle, codeAt, bssAt, values);
@@ -789,16 +1034,20 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
     symsOf[p.id] = syms;
     info.push({ id: p.id, index: mc ? first + i : st ? STOCK_EXTENDED[st.machine] : null, desc: mc ? 76 + 5 * i : null,
                 extends: st ? st.machine : null, slot: fx ? fx.point.slice(3) : null, fx_id: fx ? fx.id : null,
+                filter_id: fl ? fl.id : null,
                 code_at: codeAt, code: blob.length, bss_at: bssAt, bss: bssEnd - bssAt });
     codeCursor = codeAt + blob.length;
     bssCursor = bssEnd;
   });
   let layer = null, dispatch = null;              // the shortcut layer, the dispatchers: in the builds that need them
-  if (packages.some((p) => p.uses.some((u) => u.point === "shortcut"))) {
+  if (packages.some((p) => p.uses.some((u) => u.point === "shortcut")) || filters.length || transpose) {   // and every
+    // filter build, and with Transpose
     if (!parts.shortcuts) throw new Error("a machine declares a shortcut, and the page lacks the shortcut layer");
+    if (filters.length && shortcutUses(table, parts.shortcuts).length)    // the key map's rule R1
+      throw new Error(`${filters.map((p) => p.id).join(", ")} and a machine's value on MACHINES + a knob: a build has either filters or a machine's knob values, both live in k 28..31`);
     const at = align4(codeCursor);
     layer = shortcutLayer(mainOs, parts.shortcuts, table, symsOf, shortcutUses(table, parts.shortcuts), at,
-                          lay.stubs, tabFirst, added.length ? lay.descn : frames.stock.desc);
+                          lay.stubs, tabFirst, added.length ? lay.descn : frames.stock.desc, transpose);
     blobs.push([at, layer.blob]);
     codeCursor = at + layer.blob.length;
   }
@@ -824,24 +1073,82 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
     blobs.push([at, fxs.blob]);
     codeCursor = at + fxs.blob.length;
   }
+  let fl = null;                                  // the filter slot, in the builds that have a filter (notes/72)
+  if (filters.length) {
+    if (!parts.fltslot) throw new Error("a filter is ticked, and the page lacks the filter slot");
+    const at = align4(codeCursor);
+    fl = flLayer(mainOs, parts.fltslot, filters, symsOf, at, lay.stubs, frames.stock.desc,
+                 added.length ? lay.descn : frames.stock.desc, lay.dstride, layer.symbols, fxs ? fxs.symbols.fx_keys : 0);
+    blobs.push([at, fl.blob]);
+    codeCursor = at + fl.blob.length;
+    // the knob lookup, the record functions and the question for TRACK go to the filter slot first
+    layer.writes = layer.writes.filter((x) => !fl.skip.has(x.off + BASE));
+    if (fxs) fxs.writes = fxs.writes.filter((x) => !fl.skip.has(x.off + BASE));
+  }
+  let cpus = null;                                // the CPU page (notes/78), after the parts whose measures it reads
+  if (cpu) {
+    if (!parts.cpu) throw new Error("the CPU page is ticked, and the page lacks its part");
+    const at = align4(codeCursor);
+    cpus = cpuLayer(mainOs, parts.cpu, at, lay.stubs, fl, fxs, parts.fltslot, parts.fxslot);
+    blobs.push([at, cpus.blob]);
+    codeCursor = at + cpus.blob.length;
+  }
+  let rss = null;                                 // the RESAMPLE recorder (notes/79), its buffer in a RAM claim of its own
+  if (resample) {
+    if (!parts.resample) throw new Error("RESAMPLE is ticked, and the page lacks its part");
+    const at = align4(codeCursor);
+    const s = added.findIndex((p) => p.id === "sampler");
+    rss = resampleLayer(mainOs, parts.resample, at, lay.stubs, s < 0 ? 0xff : first + s);
+    blobs.push([at, rss.blob]);
+    codeCursor = at + rss.blob.length;
+  }
+  let trs = null;                                 // Transpose, with the shortcut layer's data block for its "used" byte
+  if (transpose) {
+    if (!parts.transpose) throw new Error("Transpose is ticked, and the page lacks its part");
+    const at = align4(codeCursor);
+    trs = transposeLayer(mainOs, parts.transpose, at, lay.stubs, layer.symbols.sc_data);
+    blobs.push([at, trs.blob]);
+    codeCursor = at + trs.blob.length;
+  }
   for (const p of packages)                       // a package's RAM claim must lie outside the payload
     for (const [lo, hi] of ramClaims(p))
       if (lo < bssCursor && pay < hi)
         throw new Error(`${p.id}: the payload (${hx(pay)}..${hx(bssCursor)}) runs into its RAM claim ${hx(lo)}..${hx(hi)}`);
   checkRamClaims(packages);
+  if (rss) {                                      // the recorder's buffer outside the payload and every package's claim
+    const [lo, hi] = rss.info.ram;
+    if (lo < bssCursor && pay < hi)
+      throw new Error(`the payload (${hx(pay)}..${hx(bssCursor)}) runs into the recorder's buffer ${hx(lo)}..${hx(hi)}`);
+    for (const p of packages)
+      for (const [a, b] of ramClaims(p))
+        if (a < hi && lo < b) throw new Error(`${p.id}: its RAM claim ${hx(a)}..${hx(b)} meets the recorder's ${hx(lo)}..${hx(hi)}`);
+  }
   const { writes, append } = machines.length ? fill(frameOf(frames, machines.length), mainOs, machines, blobs, bssCursor)
     : fillAlone(frameOf(frames, 0), mainOs, blobs, bssCursor);
-  const skip = new Set([...(layer ? layer.skip : []), ...(dispatch ? dispatch.skip : []), ...(fxs ? fxs.skip : [])]);
+  const skip = new Set([...(layer ? layer.skip : []), ...(dispatch ? dispatch.skip : []), ...(fxs ? fxs.skip : []),
+                        ...(fl ? fl.skip : []), ...(cpus ? cpus.skip : []), ...(rss ? rss.skip : []),
+                        ...(trs ? trs.skip : [])]);
   for (const p of packages) writes.push(...packageWrites(p, mainOs, symsOf[p.id], skip));
-  for (const x of [layer, dispatch, fxs]) if (x) writes.push(...x.writes);
+  for (const x of [layer, dispatch, fxs, fl, cpus, rss, trs]) if (x) writes.push(...x.writes);
   writes.sort((a, b) => a.off - b.off);
   checkOverlaps(writes);
-  const ram = [[pay, bssCursor]].concat(...packages.map(ramClaims));
-  const tid = ids.join("+");
+  const ram = [[pay, bssCursor]].concat(...packages.map(ramClaims), rss ? [rss.info.ram] : []);
+  const tid = ids.concat(cpu ? ["cpu"] : [], resample ? ["resample"] : [], transpose ? ["transpose"] : []).join("+");
   const declared = packages.flatMap((p) => p.conflicts_declared || [])
     .concat(layer ? parts.shortcuts.conflicts_declared || [] : []);   // none since notes/65 C2: computed
   const holders = buildHolders(packages, layer ? parts.shortcuts : null);       // notes/65: the claims
   if (fxs) holders.push([parts.fxslot.id, parts.fxslot.claims || {}, parts.fxslot.claims || {}, true]);
+  if (fl) {                                       // the filter slot's claims; the layer's k 28..31 are the slot's (R1)
+    const flc = parts.fltslot.claims || {};
+    holders.forEach((h, i) => { if (h[0] === "shortcuts" && h[3]) holders[i] = [h[0], narrowed(h[1], flc), narrowed(h[2], flc), true]; });
+    holders.push([parts.fltslot.id, flc, flc, true]);
+  }
+  if (rss) holders.push([parts.resample.id, parts.resample.claims || {}, parts.resample.claims || {}, true]);
+  if (trs) holders.push([parts.transpose.id, parts.transpose.claims || {}, parts.transpose.claims || {}, true]);
+  const flLoad = fl ? flCost(filters) : {};
+  if ((flLoad.steady || 0) > FX_REFUSE)            // the effects' rule (notes/68 §17), for six tracks on the dearest filter
+    throw new Error(`the filters: ${flLoad.dearest} on six tracks costs ${flLoad.steady} instructions a block `
+      + `(${Math.round(flLoad.share * 100)}% of a block), past ${FX_REFUSE}`);
   const clash = checkBuildClaims(holders);
   if (clash.length) throw new Error(`the build's own claims clash (notes/65): ${clash.join("; ")}`);
   const load = fxs ? fxCost(effects, parts.fxslot) : {};
@@ -857,22 +1164,29 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
   const symbols = {};
   for (const p of packages)
     for (const k of [p.symbols.update, p.symbols.render, ...(p.keep || [])]) symbols[k] = hx(symsOf[p.id][k]);
-  for (const x of [layer, dispatch, fxs])
+  for (const x of [layer, dispatch, fxs, fl, cpus, rss, trs])
     if (x) for (const [k, v] of Object.entries(x.symbols)) symbols[k] = hx(v);
   for (const [point, [a]] of Object.entries(lines)) symbols[`fx_line_${point.slice(3)}`] = hx(a);
   const tweak = {
     id: tid,
-    order: Math.min(...packages.map((p) => p.order)),
-    name: packages.length > 1 ? packages.map((p) => p.name).join(" + ") : packages[0].name,
+    order: Math.min(...packages.map((p) => p.order), ...(cpu ? [parts.cpu.order] : []),
+                    ...(resample ? [parts.resample.order] : []), ...(transpose ? [parts.transpose.order] : [])),
+    name: packages.map((p) => p.name).concat(cpu ? ["CPU page"] : [], resample ? ["RESAMPLE"] : [],
+                                             transpose ? ["Transpose"] : []).join(" + "),
     description: [`Composed in the browser by composer.js (notes/61): ${info.map((x) => (x.extends
       ? `${x.id} extending ${x.extends} (machine ${x.index})` : x.slot ? `${x.id} in the ${x.slot} slot (effect ${x.fx_id})`
+        : x.filter_id ? `${x.id} as filter ${x.filter_id}`
         : `${x.id} as machine ${x.index}`)).join(", ")}, `
       + (machines.length ? "registered together through the registrar runtime"
-        : "nothing registered (no added machine, notes/66 §3)") + ", as tools/compose.py composes them."],
+        : "nothing registered (no added machine, notes/66 §3)") + (cpu ? ", with the CPU page (notes/78)" : "")
+      + (resample ? ", with the RESAMPLE recorder (notes/79)" : "") + (transpose ? ", with Transpose" : "")
+      + ", as tools/compose.py composes them."],
     device: "Model:Cycles",
     os: "1.13",
     section: 3,
-    version: packages.map((p) => p.version).join("+"),
+    version: packages.map((p) => p.version).concat(cpu ? [parts.cpu.version] : [],
+                                                    resample ? [parts.resample.version] : [],
+                                                    transpose ? [parts.transpose.version] : []).join("+"),
     conflicts,
     writes,
     append,
@@ -880,11 +1194,13 @@ function compose(mainOs, frames, packages, tweaks = [], parts = {}, claims = {})
   };
   return { tweak, info: { pay, end: bssCursor, image: append.pack.reduce((s, [, k]) => s + k, 0), packages: info,
                           part: layer && layer.info, dispatch: dispatch && dispatch.info, fx: fxs && fxs.info,
-                          fx_lines: lines, fx_load: load, byClaims } };
+                          fx_lines: lines, fx_load: load, filters: fl && fl.info, fl_load: flLoad, cpu: cpus && cpus.info,
+                          resample: rss && rss.info, transpose: trs && trs.info, byClaims } };
 }
 
 const API = { place, frameOf, fill, fillAlone, segments, bootStub, parameterBlock, packageWrites, shortcutUses,
-              shortcutPresses, shortcutLayer, dispatchLayer, fxLayer, fxCost, computedConflicts, resolveClaims,
+              shortcutPresses, shortcutLayer, dispatchLayer, fxLayer, fxCost, flLayer, flCost, cpuLayer, resampleLayer,
+              transposeLayer, narrowed, computedConflicts, resolveClaims,
               claimClashes, buildHolders, checkBuildClaims, claimConflicts, compose, fromHex, FX_WARN, FX_PEAK_WARN };
 if (typeof module !== "undefined" && module.exports) module.exports = API;
 if (typeof window !== "undefined") window.MCComposer = API;
