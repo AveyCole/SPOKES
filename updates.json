@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-06T19:26:32.482Z",
+  "checkedAt": "2026-11-07T17:45:14.271Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -43,11 +43,8 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "574cf73447075aa8c9c7ce36017768305aa84d27",
-      "upstreamUpdatedAt": "2026-11-06T19:04:32Z",
-      "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...574cf73447075aa8c9c7ce36017768305aa84d27",
-      "state": "update-available"
+      "state": "check-failed",
+      "error": "GitHub check failed (404)"
     },
     {
       "id": "pppccc",
@@ -67,8 +64,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "ada11e9144c36621f78a9cd9021275252b466521",
-      "upstreamUpdatedAt": "2026-11-05T22:01:19Z",
+      "latest": "23329fbbf1ef49a8827a0b6f0d203e84e1bc8252",
+      "upstreamUpdatedAt": "2026-11-07T00:04:14Z",
       "sourceUrl": "https://github.com/AveyCole/Supermodel",
       "state": "author-hosted"
     },
@@ -100,8 +97,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "cdcd4c2fff1ce697f3af1089d1ca3af2b188c34f",
-      "upstreamUpdatedAt": "2026-11-06T14:41:41Z",
+      "latest": "66cfb63fddf6c1afc12e8d06c93984480aea019a",
+      "upstreamUpdatedAt": "2026-11-06T23:00:33Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
