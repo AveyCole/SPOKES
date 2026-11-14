@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-13T19:45:00.350Z",
+  "checkedAt": "2026-11-14T18:07:38.578Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -43,10 +43,10 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "6816d9c51ed3a2a279c183aa44ea4d9184797ed4",
-      "upstreamUpdatedAt": "2026-11-12T20:22:53Z",
+      "latest": "358c1f571948d8f12ba867ad793fd6c5d314596a",
+      "upstreamUpdatedAt": "2026-11-14T17:22:06Z",
       "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...6816d9c51ed3a2a279c183aa44ea4d9184797ed4",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...358c1f571948d8f12ba867ad793fd6c5d314596a",
       "state": "update-available"
     },
     {
@@ -55,10 +55,10 @@
       "kind": "built-in",
       "pinned": "c6d0176485baebc375ca5f97b30699b44aabe53e",
       "incorporatedAt": "2026-10-29",
-      "latest": "5250911bb3556de233305d243b6c87a2b3c3fc7e",
-      "upstreamUpdatedAt": "2026-11-12T19:09:36Z",
+      "latest": "84f937cf29d70c154506326cd4dfc4650544bbbd",
+      "upstreamUpdatedAt": "2026-11-14T13:23:42Z",
       "sourceUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods",
-      "compareUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods/compare/c6d0176485baebc375ca5f97b30699b44aabe53e...5250911bb3556de233305d243b6c87a2b3c3fc7e",
+      "compareUrl": "https://github.com/gialloinfuso/PPPCCC-M-S-Mods/compare/c6d0176485baebc375ca5f97b30699b44aabe53e...84f937cf29d70c154506326cd4dfc4650544bbbd",
       "state": "update-available"
     },
     {
@@ -100,8 +100,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "59acfffdd9bb8415e3049d1977ff2a6fae03bb0e",
-      "upstreamUpdatedAt": "2026-11-13T11:39:58Z",
+      "latest": "50e7e0252bddbf75366aed447b53f570bc6cc896",
+      "upstreamUpdatedAt": "2026-11-14T16:50:24Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
