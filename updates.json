@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-15T18:53:34.103Z",
+  "checkedAt": "2026-11-16T22:07:44.529Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -43,10 +43,10 @@
       "kind": "built-in",
       "pinned": "da939aedb4f48cf4c11376431d4b58811fc87696",
       "incorporatedAt": "2026-10-29",
-      "latest": "c7d3a4c67621645e5609798865599562c21abe0c",
-      "upstreamUpdatedAt": "2026-11-15T14:26:12Z",
+      "latest": "b3520b1632efe3f2d7fc6457d418261979b590e4",
+      "upstreamUpdatedAt": "2026-11-16T15:54:05Z",
       "sourceUrl": "https://github.com/durchgemacht/model27",
-      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...c7d3a4c67621645e5609798865599562c21abe0c",
+      "compareUrl": "https://github.com/durchgemacht/model27/compare/da939aedb4f48cf4c11376431d4b58811fc87696...b3520b1632efe3f2d7fc6457d418261979b590e4",
       "state": "update-available"
     },
     {
@@ -100,8 +100,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "aae9d83545f99e5f490f2a1998616de73ac30851",
-      "upstreamUpdatedAt": "2026-11-15T02:34:53Z",
+      "latest": "60a90940595346bd3ef2b5927f0a7b7cb4c836f9",
+      "upstreamUpdatedAt": "2026-11-16T16:02:11Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
