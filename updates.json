@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-20T20:25:12.240Z",
+  "checkedAt": "2026-11-21T19:19:15.971Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -67,8 +67,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "139d39404615304d8e57e484a99e4ba66a1f382a",
-      "upstreamUpdatedAt": "2026-11-20T05:42:05Z",
+      "latest": "959f8e4c6a93a09aa1da4f1a8ea34299eb82d1cf",
+      "upstreamUpdatedAt": "2026-11-21T07:57:53Z",
       "sourceUrl": "https://github.com/AveyCole/Supermodel",
       "state": "author-hosted"
     },
@@ -100,8 +100,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "70d11c8ccfc870477e08797ff7ed4e2e4d679387",
-      "upstreamUpdatedAt": "2026-11-20T03:29:45Z",
+      "latest": "25d709833214b163ce8011497e1c1f4d56717771",
+      "upstreamUpdatedAt": "2026-11-21T18:29:32Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
