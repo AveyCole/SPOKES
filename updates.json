@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "checkedAt": "2026-11-25T21:43:57.484Z",
+  "checkedAt": "2026-11-26T21:36:43.883Z",
   "policy": "daily-review-pr",
   "sources": [
     {
@@ -100,8 +100,8 @@
       "kind": "author-hosted",
       "pinned": null,
       "incorporatedAt": null,
-      "latest": "efb1a2246cfb7d75991b9a8586589403d5a6fdd8",
-      "upstreamUpdatedAt": "2026-11-25T21:41:16Z",
+      "latest": "247d316fbc406e576b32b72ee6c6550a078547b1",
+      "upstreamUpdatedAt": "2026-11-26T10:14:27Z",
       "sourceUrl": "https://github.com/elekloader/elekloader",
       "state": "author-hosted"
     },
